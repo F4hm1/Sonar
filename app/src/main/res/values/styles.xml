@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -13,4 +13,9 @@
         <item name="colorPrimaryDark">@color/material_deep_teal_500</item>
     </style>
 
+    <style name="MyNavigationDrawerTheme" parent="MaterialNavigationDrawerTheme">
+        <item name="colorPrimary">#8bc34a</item>
+        <item name="colorPrimaryDark">#558b2f</item>
+        <item name="colorAccent">#FFFFFF</item>
+    </style>
 </resources>
