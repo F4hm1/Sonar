@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:text="INVIA"
         android:id="@+id/bSubmit"
-        android:onClick="submitManager"
+        android:onClick="loginToJson"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"/>

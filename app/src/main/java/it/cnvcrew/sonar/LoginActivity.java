@@ -16,7 +16,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
-    public void submitManager (View v){
+    public void loginToJson(View v){
         Gson gson = new Gson();
         UtenteLogin login = new UtenteLogin();
         String user = ((EditText) findViewById(R.id.editUsername)).getText().toString();
@@ -24,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
         login.setUsername(user);
         login.setPassword(pass);
         String json = gson.toJson(login);
+        ApiHandler api = new ApiHandler();
+        api.toApi("login.php",json);
 
         Toast.makeText(this, "Utente: "+user+"\nPassword: "+pass, Toast.LENGTH_LONG).show();
     }
