@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.b_reg:
                 i = new Intent(this, RegistraActivity.class);
                 break;
+            case R.id.b_nd:
+                i = new Intent(this, MyNavigationDrawer.class);
+                break;
             default:
                 i = new Intent();
                 break;
