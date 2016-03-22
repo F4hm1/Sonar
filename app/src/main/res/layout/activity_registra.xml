@@ -95,20 +95,22 @@
         android:layout_marginRight="20dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="71dp"
             android:layout_height="wrap_content"
-            android:text=" Data di Nascita"
+            android:text="Data di Nascita"
             android:id="@+id/twData"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:textSize="18dp"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:textAlignment="center"
+            android:layout_marginTop="2dp" />
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:id="@+id/spinner_giorni"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_toLeftOf="@+id/spinner_mesi" />
 
@@ -116,14 +118,12 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:id="@+id/spinner_mesi"
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_toLeftOf="@+id/spinner_anni" />
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:id="@+id/spinner_anni"
-            android:layout_marginLeft="20dp"
             android:layout_below="@+id/editSurname_layout"
             android:layout_alignParentRight="true"
             android:layout_marginTop="5dp" />

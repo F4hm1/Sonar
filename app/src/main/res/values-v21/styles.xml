@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="Sonar" parent="AppTheme">
-        <item name="colorPrimary">@color/material_deep_teal_500</item>
-        <item name="colorPrimaryDark">@color/material_deep_teal_500</item>
-        <item name="android:statusBarColor">@color/material_deep_teal_500</item>
-    </style>
-</resources>

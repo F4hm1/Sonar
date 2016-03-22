@@ -1,8 +1,8 @@
 package it.cnvcrew.sonar;
 
-import android.media.MediaTimestamp;
 import android.os.AsyncTask;
 import android.util.Log;
+
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -33,8 +33,8 @@ public class ApiHandler extends AsyncTask<String,String,String> {
             }
             Log.d("Encoded request", encodedRequest);
             OkHttpClient client = new OkHttpClient();
-            RequestBody body = RequestBody.create(JSON, encodedJson);                                /* Boh... è così, crea il corpo della richiesta */
-            Request request = new Request.Builder().url(url).post(body).build();            /* Per POST sarà [...].post(body) al posto di .method */
+            RequestBody body = RequestBody.create(JSON, encodedJson);                               /* Boh... è così, crea il corpo della richiesta */
+            Request request = new Request.Builder().url(url).post(body).build();                    /* Per POST sarà [...].post(body) al posto di .method */
             Response response = client.newCall(request).execute();                                  /* Esegue la richiesta e si salva la risposta */
             Log.i("response", response.body().string());
             Log.i("method", request.method());
