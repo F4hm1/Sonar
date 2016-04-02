@@ -13,9 +13,6 @@ import android.support.v4.app.Fragment;
  * A simple {@link Fragment} subclass.
  */
 public class SettingsFragment extends PreferenceFragment {
-    public SettingsFragment() {
-
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,10 +21,10 @@ public class SettingsFragment extends PreferenceFragment {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.fragment_settings);
 
-        FragmentManager mFragmentManager = getFragmentManager();
+        /*FragmentManager mFragmentManager = getFragmentManager();
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
         SettingsFragment settingsFragment = new SettingsFragment();
-        mFragmentTransaction.replace(android.R.id.content, settingsFragment);
+        mFragmentTransaction.replace(android.R.id.content, settingsFragment);*/
 
     }
 }
