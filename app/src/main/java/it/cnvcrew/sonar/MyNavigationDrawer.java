@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
@@ -14,12 +16,21 @@ import it.neokree.materialnavigationdrawer.elements.MaterialSection;
  */
 
 public class MyNavigationDrawer extends MaterialNavigationDrawer {
+    Gson gson = new Gson();
+
     private ProfiloFragment profiloFragment;
     private SettingsFragment settingsFragment;
     private EventsFragment eventsFragment;
 
     @Override
     public void init(Bundle savedInstanceState) {
+        Intent receivedIntent = getIntent();
+        String loginResponse = receivedIntent.getStringExtra("userJson");
+        User user = gson.fromJson(loginResponse,User.class);
+        String name = user.getNome();
+        String surname = user.getCognome();
+        String email = user.getEmail();
+
         profiloFragment = new ProfiloFragment();
         eventsFragment = new EventsFragment();
         settingsFragment = new SettingsFragment();
@@ -32,7 +43,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
 
         /*Sections*/
         //Account
-        MaterialAccount account = new MaterialAccount(this.getResources(),"Name Surname","email@example.com",R.drawable.photo, R.drawable.background);
+        MaterialAccount account = new MaterialAccount(this.getResources(),name + " " + surname,email,R.drawable.photo, R.drawable.background);
         //Items
         MaterialSection accountSection = newSection("Profilo", R.drawable.ic_account, profiloFragment);
         MaterialSection geoSection = newSection("Posizione", R.drawable.ic_position, new Fragment());

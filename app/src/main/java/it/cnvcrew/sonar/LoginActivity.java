@@ -1,6 +1,6 @@
 package it.cnvcrew.sonar;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
@@ -19,21 +21,20 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 interface ResponseListener {
-    void loginResponseReceived(Response response);
+    void onLoginResponseReceived(Response response);
 }
 
 public class LoginActivity extends AppCompatActivity implements ResponseListener{
 
-    public static final String API_LOGIN_URL = "http://cnvcrew.ddns.net/api/";
     LoginHandler handler = new LoginHandler();
-
+    Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         handler.addListener(this);
-        Log.e("Activitty set","");
+        Log.e("Activity set","");
     }
 
     public void loginToJson(View v) throws Exception{
@@ -51,36 +52,46 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
         handler.connect(jsonString);
     }
 
-    public void loginResponseReceived(Response response){
+    public void onLoginResponseReceived(Response response){
         try{
-            Log.i("Received response", response.body().string());
-        }catch(Exception e){}
+            String responseString = response.body().string();
+            User user = gson.fromJson(responseString,User.class);
+            Log.i("Received response", responseString);
+            if(user.getId()!=-1) {
+                Intent mainActivityIntent = new Intent(this, MyNavigationDrawer.class);
+                mainActivityIntent.putExtra("userJson", gson.toJson(user));
+                this.startActivity(mainActivityIntent);
+            }else{
+//                Toast errorToast = Toast.makeText(this,"Login errato",Toast.LENGTH_LONG);
+                Log.i("Result","ko");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
 
 class LoginHandler extends AsyncTask<String, String, String> {
 
-    private static final String API_BASE_URL="http://cnvcrew.ddns.net/api/";                        /* Punto di partenza per tutti gli url */
     Response response = null;
     ResponseListener listener;
 
     @Override
     protected String doInBackground(String... params){
-        com.squareup.okhttp.OkHttpClient http = new com.squareup.okhttp.OkHttpClient();
+        OkHttpClient http = new OkHttpClient();
         RequestBody form = new FormEncodingBuilder()
                 .add("login", params[0])
                 .build();
-        com.squareup.okhttp.Request request = new com.squareup.okhttp.Request.Builder()
-                .url("http://cnvcrew.ddns.net/api/login.php")
+        Request request = new Request.Builder()
+                .url(Resources.API_LOGIN_URL)
                 .post(form)
                 .build();
         try {
-            Log.i("request body", form.toString());
             Log.i("listener reference",listener.toString());
             response = http.newCall(request).execute();
-            listener.loginResponseReceived(response);
+            listener.onLoginResponseReceived(response);
             Log.i("response",response.toString());
-            Log.i("response body",response.body().string());
+//            Log.i("response body",response.body().string());
         }catch(IOException e){
             e.printStackTrace();
         }

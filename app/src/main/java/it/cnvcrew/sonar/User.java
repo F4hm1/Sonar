@@ -16,6 +16,10 @@ public class User {
         this.email = email;
     }
 
+    public User(){
+
+    }
+
     public String getNome() {
         return nome;
     }
@@ -54,5 +58,16 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", id=" + id +
+                '}';
     }
 }
