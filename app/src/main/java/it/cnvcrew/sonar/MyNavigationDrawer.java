@@ -39,7 +39,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         this.setDefaultSectionLoaded(0);
         this.allowArrowAnimation();
         this.disableLearningPattern();
-        this.enableToolbarElevation();
+        //this.enableToolbarElevation();
 
         /*Sections*/
         //Account

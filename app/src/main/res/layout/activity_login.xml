@@ -32,7 +32,8 @@
             android:id="@+id/editUsername"
             android:hint="Username"
             android:inputType="text"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:text="lapse" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -51,7 +52,8 @@
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Password" />
+            android:hint="Password"
+            android:text="lapse" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -63,5 +65,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:onClick="loginToJson" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="TETTA"
+        android:id="@+id/tv_prova"
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/bSubmit"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFF0000" />
 
 </RelativeLayout>

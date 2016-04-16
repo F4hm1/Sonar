@@ -1,5 +1,6 @@
 package it.cnvcrew.sonar;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -27,12 +29,14 @@ interface ResponseListener {
 public class LoginActivity extends AppCompatActivity implements ResponseListener{
 
     LoginHandler handler = new LoginHandler();
+    public static TextView tetta;
     Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        tetta = (TextView) findViewById(R.id.tv_prova);
         handler.addListener(this);
         Log.e("Activity set","");
     }
@@ -56,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
         try{
             String responseString = response.body().string();
             User user = gson.fromJson(responseString,User.class);
-            Log.i("Received response", responseString);
+            Log.i("Received user", user.toString());
             if(user.getId()!=-1) {
                 Intent mainActivityIntent = new Intent(this, MyNavigationDrawer.class);
                 mainActivityIntent.putExtra("userJson", gson.toJson(user));
@@ -88,7 +92,9 @@ class LoginHandler extends AsyncTask<String, String, String> {
                 .build();
         try {
             Log.i("listener reference",listener.toString());
+            this.publishProgress("richiesta");
             response = http.newCall(request).execute();
+            this.publishProgress("risposta");
             listener.onLoginResponseReceived(response);
             Log.i("response",response.toString());
 //            Log.i("response body",response.body().string());
@@ -96,6 +102,12 @@ class LoginHandler extends AsyncTask<String, String, String> {
             e.printStackTrace();
         }
         return response.toString();
+    }
+
+    @Override
+    protected void onProgressUpdate(String... values) {
+        super.onProgressUpdate(values);
+        LoginActivity.tetta.setText(values[0]);
     }
 
     public void connect(String data){

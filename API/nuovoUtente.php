@@ -6,14 +6,20 @@
     }else{
         echo "Connessione eseguita correttamente <br />";
     }
-    $username=$_GET['username'];
-    $password=$_GET['password'];
-    $name=$_GET['name'];
-    $surname=$_GET['surname'];
-    $dob=$_GET['dob'];
-    $email=$_GET['email'];
+    $json=$_GET['json'];
+    $json=urldecode($json);
+    $json=json_decode($jsone,true);
+    $username=$json['username'];
+    $password=$json['password'];
+    $name=$json['name'];
+    $surname=$json['surname'];
+    $dob=$json['dob'];
+    $email=$json['email'];
     $nuovoutente="INSERT INTO users (username,password,name,surname,dob,email) VALUES ('$username','$password','$name','$surname','$dob','$email');";
     $result=$connessione->query($nuovoutente);
+    $tmp_img = $this->image['tmp_name'];
+    $sql = "INSERT INTO ImageStore(ImageId,Image) VALUES('$this->image_id','" . mysql_escape_string(file_get_contents($tmp_image)) . "')";
+    mysql_query($sql);
     echo $nuovoutente;
     if($result){
         echo "Utente creato <br />";

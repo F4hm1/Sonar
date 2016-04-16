@@ -5,8 +5,8 @@ package it.cnvcrew.sonar;
  */
 public class Resources {
 
-    public static final String API_BASE_URL="http://cnvcrew.ddns.net/api/";
-    public static final String API_LOGIN_URL="http://cnvcrew.ddns.net/api/login.php";
+    public static final String API_BASE_URL="http://www.paws.it/API/";
+    public static final String API_LOGIN_URL="http://www.paws.it/API/login.php";
 
 
 }
