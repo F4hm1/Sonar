@@ -21,6 +21,8 @@ import com.squareup.okhttp.Response;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
+import java.util.concurrent.TimeUnit;
 
 interface ResponseListener {
     void onLoginResponseReceived(Response response);
@@ -82,7 +84,10 @@ class LoginHandler extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... params){
+        String ritorno;
+
         OkHttpClient http = new OkHttpClient();
+        http.setConnectTimeout(5, TimeUnit.SECONDS);
         RequestBody form = new FormEncodingBuilder()
                 .add("login", params[0])
                 .build();
@@ -97,11 +102,18 @@ class LoginHandler extends AsyncTask<String, String, String> {
             this.publishProgress("risposta");
             listener.onLoginResponseReceived(response);
             Log.i("response",response.toString());
-//            Log.i("response body",response.body().string());
+            Log.i("response body",response.body().string());
+            ritorno = response.toString();
+        }catch(UnknownHostException e){
+            Log.e("Request exception","Host sconosciuto");
+            this.publishProgress("HOST SCONOSCIUTO");
+            ritorno = "unknownhost";
         }catch(IOException e){
-            e.printStackTrace();
+            Log.e("Request exception","IOException");
+            this.publishProgress("Errore di I/O");
+            ritorno = "ioexception";
         }
-        return response.toString();
+        return ritorno;
     }
 
     @Override

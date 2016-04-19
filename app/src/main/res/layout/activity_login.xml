@@ -53,7 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Password"
-            android:text="lapse" />
+            android:text="lapse"
+            android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
