@@ -24,10 +24,6 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
-interface ResponseListener {
-    void onLoginResponseReceived(Response response);
-}
-
 public class LoginActivity extends AppCompatActivity implements ResponseListener{
 
     LoginHandler handler = new LoginHandler();
@@ -58,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
         handler.connect(jsonString);
     }
 
-    public void onLoginResponseReceived(Response response){
+    public void onApiResponseReceived(Response response){
         try{
             String responseString = response.body().string();
             User user = gson.fromJson(responseString,User.class);
@@ -100,7 +96,7 @@ class LoginHandler extends AsyncTask<String, String, String> {
             this.publishProgress("richiesta");
             response = http.newCall(request).execute();
             this.publishProgress("risposta");
-            listener.onLoginResponseReceived(response);
+            listener.onApiResponseReceived(response);
             Log.i("response",response.toString());
             Log.i("response body",response.body().string());
             ritorno = response.toString();

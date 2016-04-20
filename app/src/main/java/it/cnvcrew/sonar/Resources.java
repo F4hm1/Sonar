@@ -7,6 +7,7 @@ public class Resources {
 
     public static final String API_BASE_URL="http://www.paws.it/API/";
     public static final String API_LOGIN_URL="http://www.paws.it/API/login.php";
+    public static final String API_REGISTER_URL="http://www.paws.it/API/nuovoutente.php";
 
 
 }
