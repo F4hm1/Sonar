@@ -11,11 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
         <activity
@@ -23,7 +19,14 @@
             android:label="@string/app_name"
             android:theme="@style/MyNavigationDrawerTheme" />
         <activity android:name=".RegistraActivity" />
-        <activity android:name=".CreateNewEventActivity"></activity>
+        <activity android:name=".CreateNewEventActivity" />
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

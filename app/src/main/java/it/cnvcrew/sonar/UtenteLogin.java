@@ -1,9 +1,11 @@
 package it.cnvcrew.sonar;
 
+import java.io.Serializable;
+
 /**
  * Created by Gianmarco on 02/03/2016.
  */
-public class UtenteLogin {
+public class UtenteLogin implements Serializable {
     private String username;
     private String password;
 
