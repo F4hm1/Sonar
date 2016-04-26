@@ -1,9 +1,12 @@
 package it.cnvcrew.sonar;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 
@@ -41,9 +44,14 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         this.disableLearningPattern();
         //this.enableToolbarElevation();
 
+        //Blur header background image
+        BlurImage blurImage = new BlurImage();
+        Bitmap imageToBlur = BitmapFactory.decodeResource(getResources(), R.drawable.background2);
+        Bitmap blurredImage = blurImage.blur(getApplicationContext(), imageToBlur);
+
         /*Sections*/
         //Account
-        MaterialAccount account = new MaterialAccount(this.getResources(),name + " " + surname,email,R.drawable.photo, R.drawable.background);
+        MaterialAccount account = new MaterialAccount(this.getResources(),name + " " + surname,email,R.drawable.cnv, blurredImage);
         //Items
         MaterialSection accountSection = newSection("Profilo", R.drawable.ic_account, profiloFragment);
         MaterialSection geoSection = newSection("Posizione", R.drawable.ic_position, new Fragment());

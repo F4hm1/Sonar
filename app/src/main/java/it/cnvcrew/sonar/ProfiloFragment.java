@@ -1,12 +1,22 @@
 package it.cnvcrew.sonar;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 /**
@@ -24,11 +34,22 @@ public class ProfiloFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_profilo, container, false);
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_profilo, container, false);
+
+        //Set name and surname TextView with user's name and surname
+        /*((TextView) v.findViewById(R.id.tvNome)).setText(""));
+        ((TextView) v.findViewById(R.id.tvCognome)).setText("");*/
+
+        //Blur background image of the header
+        BlurImage blurImage = new BlurImage();
+        ImageView img = (ImageView) v.findViewById(R.id.profile_img_blur);
+        Bitmap imageToBlur = BitmapFactory.decodeResource(getResources(), R.drawable.cnv);
+        Bitmap blurredImage = blurImage.blur(getContext(), imageToBlur);
+        img.setImageBitmap(blurredImage);
+        return v;
     }
 
 }

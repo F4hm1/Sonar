@@ -1,6 +1,9 @@
 package it.cnvcrew.sonar;
 
+import android.app.Application;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -93,7 +96,7 @@ class LoginHandler extends AsyncTask<String, String, String> {
                 .build();
         try {
             Log.i("listener reference",listener.toString());
-            this.publishProgress("richiesta");
+            //this.publishProgress("richiesta");
             response = http.newCall(request).execute();
             this.publishProgress("risposta");
             listener.onApiResponseReceived(response);
