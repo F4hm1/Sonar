@@ -24,6 +24,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
     private ProfiloFragment profiloFragment;
     private SettingsFragment settingsFragment;
     private EventsFragment eventsFragment;
+    private LogoutFragment logoutFragment;
 
     @Override
     public void init(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         profiloFragment = new ProfiloFragment();
         eventsFragment = new EventsFragment();
         settingsFragment = new SettingsFragment();
+        logoutFragment = new LogoutFragment();
 
         //Functionalities
         this.setDefaultSectionLoaded(0);
@@ -58,6 +60,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         MaterialSection eventSection = newSection("Eventi", R.drawable.ic_events, eventsFragment);
         MaterialSection settingSection = newSection("Impostazioni", R.drawable.ic_settings, settingsFragment);
         MaterialSection infoSection = newSection("Info", R.drawable.ic_info, new Fragment());
+        MaterialSection logoutSection = newSection("Logout", logoutFragment);
         //Add section to nav drawer
         this.addAccount(account);
         this.addSection(accountSection);
@@ -66,12 +69,10 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         this.addSubheader("Altro");
         this.addSection(settingSection);
         this.addSection(infoSection);
+        this.addBottomSection(logoutSection);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(getCurrentSection().getTitle().equals("Profilo")) {
-
-        }
         if(getCurrentSection().getTitle().equals("Eventi")) {
             getMenuInflater().inflate(R.menu.menu_fragment_eventi, menu);
         }

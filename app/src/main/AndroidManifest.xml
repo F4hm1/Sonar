@@ -20,7 +20,9 @@
             android:theme="@style/MyNavigationDrawerTheme" />
         <activity android:name=".RegistraActivity" />
         <activity android:name=".CreateNewEventActivity" />
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppThemeSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

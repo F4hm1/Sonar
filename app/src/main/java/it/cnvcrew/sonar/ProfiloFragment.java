@@ -1,6 +1,7 @@
 package it.cnvcrew.sonar;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,7 +28,10 @@ import android.widget.TextView;
  * Use the {@link ProfiloFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class ProfiloFragment extends Fragment {
+
+    private SharedPreferences sharedPrefs;
 
     public ProfiloFragment() {
         // Required empty public constructor
@@ -39,8 +43,11 @@ public class ProfiloFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profilo, container, false);
 
+        //Get SharedPreferences
+        sharedPrefs = getActivity().getSharedPreferences(Resources.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+
         //Set name and surname TextView with user's name and surname
-        /*((TextView) v.findViewById(R.id.tvNome)).setText(""));
+        /*((TextView) v.findViewById(R.id.tvNome)).setText("");
         ((TextView) v.findViewById(R.id.tvCognome)).setText("");*/
 
         //Blur background image of the header
