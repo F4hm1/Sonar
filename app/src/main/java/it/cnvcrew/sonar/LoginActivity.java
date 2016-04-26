@@ -1,10 +1,13 @@
 package it.cnvcrew.sonar;
 
 import android.app.Application;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,28 +35,47 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
     LoginHandler handler = new LoginHandler();
     public static TextView tetta;
     Gson gson = new Gson();
+    SharedPreferences sharedPrefs;
+    SharedPreferences.Editor sharedPrefsEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sharedPrefs = getSharedPreferences(Resources.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        sharedPrefsEditor = sharedPrefs.edit();
         tetta = (TextView) findViewById(R.id.tv_prova);
         handler.addListener(this);
         Log.e("Activity set","");
     }
 
     public void loginToJson(View v) throws Exception{
+        SharedPreferences sharedPrefs = getPreferences(Context.MODE_PRIVATE);
         Gson gson = new Gson();
         UtenteLogin login = new UtenteLogin();
+        LoginHandler handler = new LoginHandler();
+        handler.addListener(this);
+
         String user = ((EditText) findViewById(R.id.editUsername)).getText().toString();
         String pass = ((EditText) findViewById(R.id.editPassword)).getText().toString();
         login.setUsername(user);
         login.setPassword(pass);
+        sharedPrefsEditor.putString("username",user);
+        sharedPrefsEditor.putString("password",pass);
         String jsonString = gson.toJson(login);
         Log.i("json", jsonString);
-        LoginHandler handler = new LoginHandler();
-        handler.addListener(this);
 
+        if(sharedPrefs.contains("login")){
+            String userPrefs = sharedPrefs.getString("username",null);                              /* Se esiste un utente salvato */
+            String passPrefs = sharedPrefs.getString("password",null);
+            if(user.equals(userPrefs) && pass.equals(passPrefs)){
+                Intent intent = new Intent(this,MyNavigationDrawer.class);
+                intent.putExtra("userJson", sharedPrefs.getString("user",null));
+                this.startActivity(intent);
+            }else{
+                handler.connect(jsonString);
+            }
+        }
         handler.connect(jsonString);
     }
 
@@ -63,6 +85,8 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
             User user = gson.fromJson(responseString,User.class);
             Log.i("Received user", user.toString());
             if(user.getId()!=-1) {
+                sharedPrefsEditor.apply();
+                Log.i("SharedPrefs","Written");
                 Intent mainActivityIntent = new Intent(this, MyNavigationDrawer.class);
                 mainActivityIntent.putExtra("userJson", gson.toJson(user));
                 this.startActivity(mainActivityIntent);

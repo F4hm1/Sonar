@@ -1,11 +1,12 @@
 package it.cnvcrew.sonar;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  * Created by Alessandro on 31/03/2016.
  */
-public class User {
+public class User implements Serializable {
 
     String nome,cognome,username,email,password;
     int id;
