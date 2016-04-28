@@ -19,7 +19,7 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                     Intent loginIntent = new Intent(activity, LoginActivity.class);
                     activity.startActivity(loginIntent);
+                    this.activity.finish();
                     Log.i("Result", "ko");
                 }
                 try {
@@ -68,15 +69,18 @@ public class SplashActivity extends AppCompatActivity {
                         Intent mainActivityIntent = new Intent(activity, MyNavigationDrawer.class);
                         mainActivityIntent.putExtra("userJson", gson.toJson(user));
                         activity.startActivity(mainActivityIntent);
+                        this.activity.finish();
                     } else {
                         Intent loginIntent = new Intent(activity, LoginActivity.class);
                         activity.startActivity(loginIntent);
+                        this.activity.finish();
                         Log.i("Result", "ko");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                     Intent loginIntent = new Intent(activity, LoginActivity.class);
                     activity.startActivity(loginIntent);
+                    this.activity.finish();
                     Log.i("Result", "ko");
                 }
 
@@ -84,6 +88,7 @@ public class SplashActivity extends AppCompatActivity {
                 Log.w("SplashScreen","No SharedPrefs found");
                 Intent loginIntent = new Intent(activity, LoginActivity.class);
                 activity.startActivity(loginIntent);
+                this.activity.finish();
                 Log.i("Result", "ko");
             }
             return null;

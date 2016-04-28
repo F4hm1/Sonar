@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
                 Intent intent = new Intent(this,MyNavigationDrawer.class);
                 intent.putExtra("userJson", sharedPrefs.getString("user",null));
                 this.startActivity(intent);
+                this.finish();
             }else{
                 handler.connect(jsonString);
             }
@@ -90,6 +91,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
                 Intent mainActivityIntent = new Intent(this, MyNavigationDrawer.class);
                 mainActivityIntent.putExtra("userJson", gson.toJson(user));
                 this.startActivity(mainActivityIntent);
+                this.finish();
             }else{
 //                Toast errorToast = Toast.makeText(this,"Login errato",Toast.LENGTH_LONG);
                 Log.i("Result","ko");

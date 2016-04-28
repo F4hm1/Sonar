@@ -38,6 +38,7 @@ public class LogoutFragment extends Fragment {
         sharedPrefsEditor = (sharedPrefs.edit()).clear();
         sharedPrefsEditor.commit();
         startActivity(new Intent(this.getActivity(), LoginActivity.class));
+        this.getActivity().finish();
         return textView;
     }
 

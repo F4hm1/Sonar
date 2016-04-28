@@ -25,15 +25,16 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
     private SettingsFragment settingsFragment;
     private EventsFragment eventsFragment;
     private LogoutFragment logoutFragment;
+    public static String name,surname,email;
 
     @Override
     public void init(Bundle savedInstanceState) {
         Intent receivedIntent = getIntent();
         String loginResponse = receivedIntent.getStringExtra("userJson");
-        User user = gson.fromJson(loginResponse,User.class);
-        String name = user.getNome();
-        String surname = user.getCognome();
-        String email = user.getEmail();
+        User user = gson.fromJson(loginResponse, User.class);
+        name = user.getNome();
+        surname = user.getCognome();
+        email = user.getEmail();
 
         profiloFragment = new ProfiloFragment();
         eventsFragment = new EventsFragment();
@@ -48,7 +49,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
 
         //Blur header background image
         BlurImage blurImage = new BlurImage();
-        Bitmap imageToBlur = BitmapFactory.decodeResource(getResources(), R.drawable.background2);
+        Bitmap imageToBlur = BitmapFactory.decodeResource(getResources(), R.drawable.sunsetswerve);
         Bitmap blurredImage = blurImage.blur(getApplicationContext(), imageToBlur);
 
         /*Sections*/
@@ -84,4 +85,15 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         startActivity(i);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }

@@ -47,8 +47,9 @@ public class ProfiloFragment extends Fragment {
         sharedPrefs = getActivity().getSharedPreferences(Resources.SHARED_PREFERENCES, Context.MODE_PRIVATE);
 
         //Set name and surname TextView with user's name and surname
-        /*((TextView) v.findViewById(R.id.tvNome)).setText("");
-        ((TextView) v.findViewById(R.id.tvCognome)).setText("");*/
+        //TODO cambiare porcamadonna
+        ((TextView) v.findViewById(R.id.tvNome)).setText(MyNavigationDrawer.name);
+        ((TextView) v.findViewById(R.id.tvCognome)).setText(MyNavigationDrawer.surname);
 
         //Blur background image of the header
         BlurImage blurImage = new BlurImage();
