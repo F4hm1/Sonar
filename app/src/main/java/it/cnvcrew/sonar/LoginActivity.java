@@ -11,6 +11,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -33,7 +35,6 @@ import java.util.concurrent.TimeUnit;
 public class LoginActivity extends AppCompatActivity implements ResponseListener{
 
     LoginHandler handler = new LoginHandler();
-    public static TextView tetta;
     Gson gson = new Gson();
     SharedPreferences sharedPrefs;
     SharedPreferences.Editor sharedPrefsEditor;
@@ -44,9 +45,14 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
         setContentView(R.layout.activity_login);
         sharedPrefs = getSharedPreferences(Resources.SHARED_PREFERENCES, Context.MODE_PRIVATE);
         sharedPrefsEditor = sharedPrefs.edit();
-        tetta = (TextView) findViewById(R.id.tv_prova);
         handler.addListener(this);
         Log.e("Activity set","");
+
+        //Set the link for "Registrati" underline
+        String udata="Registrati";
+        SpannableString content = new SpannableString(udata);
+        content.setSpan(new UnderlineSpan(), 0, udata.length(), 0);
+        ((TextView) findViewById(R.id.tv_register)).setText(content);
     }
 
     public void loginToJson(View v) throws Exception{
@@ -84,6 +90,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
         try{
             String responseString = response.body().string();
             User user = gson.fromJson(responseString,User.class);
+            Log.i("Received JSON",responseString);
             Log.i("Received user", user.toString());
             if(user.getId()!=-1) {
                 sharedPrefsEditor.apply();
@@ -99,6 +106,10 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void launchRegister (View v){
+        startActivity(new Intent(this, RegistraActivity.class));
     }
 }
 
@@ -144,7 +155,6 @@ class LoginHandler extends AsyncTask<String, String, String> {
     @Override
     protected void onProgressUpdate(String... values) {
         super.onProgressUpdate(values);
-        LoginActivity.tetta.setText(values[0]);
     }
 
     public void connect(String data){

@@ -53,10 +53,10 @@ public class ProfiloFragment extends Fragment {
 
         //Blur background image of the header
         BlurImage blurImage = new BlurImage();
-        ImageView img = (ImageView) v.findViewById(R.id.profile_img_blur);
+        /*ImageView img = (ImageView) v.findViewById(R.id.profile_img_blur);
         Bitmap imageToBlur = BitmapFactory.decodeResource(getResources(), R.drawable.cnv);
         Bitmap blurredImage = blurImage.blur(getContext(), imageToBlur);
-        img.setImageBitmap(blurredImage);
+        img.setImageBitmap(blurredImage);*/
         return v;
     }
 

@@ -25,6 +25,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
     private SettingsFragment settingsFragment;
     private EventsFragment eventsFragment;
     private LogoutFragment logoutFragment;
+    private PositionFragment positionFragment;
     public static String name,surname,email;
 
     @Override
@@ -40,6 +41,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         eventsFragment = new EventsFragment();
         settingsFragment = new SettingsFragment();
         logoutFragment = new LogoutFragment();
+        positionFragment = new PositionFragment();
 
         //Functionalities
         this.setDefaultSectionLoaded(0);
@@ -49,7 +51,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
 
         //Blur header background image
         BlurImage blurImage = new BlurImage();
-        Bitmap imageToBlur = BitmapFactory.decodeResource(getResources(), R.drawable.sunsetswerve);
+        Bitmap imageToBlur = BitmapFactory.decodeResource(getResources(), R.drawable.ic_account);
         Bitmap blurredImage = blurImage.blur(getApplicationContext(), imageToBlur);
 
         /*Sections*/
@@ -57,7 +59,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         MaterialAccount account = new MaterialAccount(this.getResources(),name + " " + surname,email,R.drawable.cnv, blurredImage);
         //Items
         MaterialSection accountSection = newSection("Profilo", R.drawable.ic_account, profiloFragment);
-        MaterialSection geoSection = newSection("Posizione", R.drawable.ic_position, new Fragment());
+        MaterialSection geoSection = newSection("Posizione", R.drawable.ic_position, positionFragment);
         MaterialSection eventSection = newSection("Eventi", R.drawable.ic_events, eventsFragment);
         MaterialSection settingSection = newSection("Impostazioni", R.drawable.ic_settings, settingsFragment);
         MaterialSection infoSection = newSection("Info", R.drawable.ic_info, new Fragment());

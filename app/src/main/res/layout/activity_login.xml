@@ -67,15 +67,39 @@
         android:layout_marginTop="10dp"
         android:onClick="loginToJson" />
 
-    <TextView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="TETTA"
-        android:id="@+id/tv_prova"
-        android:layout_marginTop="70dp"
-        android:layout_below="@+id/bSubmit"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:textColor="#FFFF0000" />
+        android:textAlignment="gravity"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Non sei registrato?"
+            android:id="@+id/tv_not_registered"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/editPassword_layout"
+            android:layout_alignParentLeft="true"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrati"
+            android:id="@+id/tv_register"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/editPassword_layout"
+            android:layout_alignParentLeft="true"
+            android:textStyle="bold"
+            android:onClick="launchRegister"
+            android:clickable="true"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp" />
+    </LinearLayout>
 
 </RelativeLayout>
