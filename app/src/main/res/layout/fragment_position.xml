@@ -9,20 +9,22 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Invia posizione"
-        android:id="@+id/btn_send_position"
+        android:text="High accuracy"
+        android:id="@+id/btn_send_position_high"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="placeholder"
-        android:id="@+id/tv_debug"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:text="Accuracy:"
+        android:id="@+id/tv_accuracy1"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,7 +32,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Longitude:"
         android:id="@+id/textView"
-        android:layout_below="@+id/btn_send_position"
+        android:layout_below="@+id/btn_send_position_high"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp" />
@@ -43,13 +45,13 @@
         android:layout_alignTop="@+id/textView"
         android:layout_toRightOf="@+id/textView"
         android:layout_toEndOf="@+id/textView"
-        android:layout_marginLeft="20dp" />
+        android:layout_marginLeft="40dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Longitude:"
+        android:text="Latitude:"
         android:id="@+id/textView2"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
@@ -64,5 +66,59 @@
         android:layout_alignTop="@+id/textView2"
         android:layout_alignLeft="@+id/tv_longitude"
         android:layout_alignStart="@+id/tv_longitude" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Low Accuracy"
+        android:id="@+id/btn_send_position_low"
+        android:layout_above="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onClick" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Sei a:"
+        android:id="@+id/tv_seia"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/tv_dovesei"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tv_accuracy"
+        android:layout_alignTop="@+id/tv_accuracy1"
+        android:layout_toEndOf="@+id/tv_latitude"
+        android:layout_alignLeft="@+id/tv_longitude" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Net distance:"
+        android:id="@+id/tv_net_accuracy1"
+        android:layout_below="@+id/tv_accuracy1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tv_net_accuracy"
+        android:layout_below="@+id/tv_accuracy"
+        android:layout_alignLeft="@+id/tv_accuracy" />
 
 </RelativeLayout>
