@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusable="true"
     android:focusableInTouchMode="true"
 
@@ -13,49 +13,57 @@
         android:id="@+id/imgLogo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="120dp"
         android:src="@mipmap/ic_launcher" />
-    <android.support.design.widget.TextInputLayout
+
+    <com.github.florent37.materialtextfield.MaterialTextField
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editUsername_layout"
-        android:layout_marginTop="150dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/editUsername"
-            android:hint="Username"
-            android:inputType="text"
-            android:singleLine="true"
-            android:text="lapse" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editPassword_layout"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/imgLogo"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
+        app:mtf_image="@drawable/ic_account"
+        app:mtf_openKeyboardOnFocus="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editUsername"
+            android:hint="Username"
+            android:textColor="#333"
+            android:textColorHint="#666"
+            android:textSize="15sp" />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editPassword_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_below="@+id/editUsername_layout"
-        android:layout_marginTop="10dp">
+        app:mtf_image="@drawable/ic_settings"
+        app:mtf_openKeyboardOnFocus="true">
         <EditText
             android:id="@+id/editPassword"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Password"
-            android:text="lapse"
+            android:text=""
             android:singleLine="true" />
-    </android.support.design.widget.TextInputLayout>
+    </com.github.florent37.materialtextfield.MaterialTextField>
 
     <Button
         android:layout_width="wrap_content"

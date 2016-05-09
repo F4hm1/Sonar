@@ -39,10 +39,8 @@ public class ProfiloFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profilo, container, false);
-
         //Get SharedPreferences
         sharedPrefs = getActivity().getSharedPreferences(Resources.SHARED_PREFERENCES, Context.MODE_PRIVATE);
 
@@ -57,6 +55,7 @@ public class ProfiloFragment extends Fragment {
         Bitmap imageToBlur = BitmapFactory.decodeResource(getResources(), R.drawable.cnv);
         Bitmap blurredImage = blurImage.blur(getContext(), imageToBlur);
         img.setImageBitmap(blurredImage);*/
+
         return v;
     }
 

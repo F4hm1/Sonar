@@ -1,5 +1,7 @@
 package it.cnvcrew.sonar;
 
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,19 +22,18 @@ public class AboutFragment extends Fragment {
         Element versionElement = new Element().setTitle("1.0");
         View aboutPage = new AboutPage(this.getContext())
                 .isRTL(false)
-                .setImage(R.mipmap.ic_launcher)
+                .setImage(R.drawable.cnv_logo)
                 .addItem(versionElement)
                 .addGroup("Connect with us")
-                .addEmail("elmehdi.sakout@gmail.com")
-                .addWebsite("http://medyo.github.io/")
-                .addFacebook("the.medy")
-                .addTwitter("medyo80")
-                .addYoutube("UCdPQtdWIsg7_pi4mrRu46vA")
-                .addPlayStore("com.ideashower.readitlater.pro")
-                .addGitHub("medyo")
-                .addInstagram("medyo80")
+                .addEmail("cnvriparazioni@gmail.com")
+                .addWebsite("http://cnvcrew.github.io/")
+                .addFacebook("lapseofreason")
+                .addTwitter("MrDrusi")
+                .addGitHub("CNVCrew")
+                .addInstagram("filippo_gas")
                 .create();
-        return inflater.inflate(R.layout.fragment_events, container, false);
+
+        return aboutPage;
     }
 
 }

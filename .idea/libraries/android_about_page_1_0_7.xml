@@ -5,6 +5,8 @@
       <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.medyo/android-about-page/1.0.7/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.medyo/android-about-page/1.0.7/8741598a36aa62981da3089455101cb9eff0b80b/android-about-page-1.0.7-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

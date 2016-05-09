@@ -26,6 +26,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
     private EventsFragment eventsFragment;
     private LogoutFragment logoutFragment;
     private PositionFragment positionFragment;
+    private AboutFragment aboutFragment;
     public static String name,surname,email;
 
     @Override
@@ -42,6 +43,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         settingsFragment = new SettingsFragment();
         logoutFragment = new LogoutFragment();
         positionFragment = new PositionFragment();
+        aboutFragment = new AboutFragment();
 
         //Functionalities
         this.setDefaultSectionLoaded(0);
@@ -56,13 +58,13 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
 
         /*Sections*/
         //Account
-        MaterialAccount account = new MaterialAccount(this.getResources(),name + " " + surname,email,R.drawable.cnv, blurredImage);
+        MaterialAccount account = new MaterialAccount(this.getResources(),name + " " + surname,email,R.drawable.cnv, R.drawable.sunsetswerve);
         //Items
         MaterialSection accountSection = newSection("Profilo", R.drawable.ic_account, profiloFragment);
         MaterialSection geoSection = newSection("Posizione", R.drawable.ic_position, positionFragment);
         MaterialSection eventSection = newSection("Eventi", R.drawable.ic_events, eventsFragment);
         MaterialSection settingSection = newSection("Impostazioni", R.drawable.ic_settings, settingsFragment);
-        MaterialSection infoSection = newSection("Info", R.drawable.ic_info, new Fragment());
+        MaterialSection aboutSection = newSection("Info", R.drawable.ic_info, aboutFragment);
         MaterialSection logoutSection = newSection("Logout", logoutFragment);
         //Add section to nav drawer
         this.addAccount(account);
@@ -71,7 +73,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         this.addSection(eventSection);
         this.addSubheader("Altro");
         this.addSection(settingSection);
-        this.addSection(infoSection);
+        this.addSection(aboutSection);
         this.addBottomSection(logoutSection);
     }
 
