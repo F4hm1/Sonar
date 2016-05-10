@@ -1,5 +1,10 @@
 package it.cnvcrew.sonar;
 
+import android.app.Application;
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +23,7 @@ import android.widget.TextView;
 
 import com.github.florent37.materialtextfield.MaterialTextField;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.github.florent37.materialtextfield.MaterialTextField;
 import com.google.gson.Gson;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
