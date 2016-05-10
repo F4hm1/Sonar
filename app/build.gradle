@@ -36,7 +36,8 @@ dependencies {
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.github.medyo:android-about-page:1.0.7'
     compile 'com.github.florent37:materialtextfield:1.0.3@aar'
-
+    compile 'com.github.mrengineer13:snackbar:1.2.0'
+    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
 
 }
 

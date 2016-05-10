@@ -19,7 +19,7 @@
     <com.github.florent37.materialtextfield.MaterialTextField
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editUsername_layout"
+        android:id="@+id/edit_username_login_layout"
         android:layout_marginTop="10dp"
         android:layout_below="@id/imgLogo"
         android:layout_centerHorizontal="true"
@@ -33,7 +33,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editUsername"
+            android:id="@+id/edit_username_login"
             android:hint="Username"
             android:textColor="#333"
             android:textColorHint="#666"
@@ -45,18 +45,18 @@
     <com.github.florent37.materialtextfield.MaterialTextField
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editPassword_layout"
+        android:id="@+id/edit_password_login_layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editUsername_layout"
-        app:mtf_image="@drawable/ic_settings"
+        android:layout_below="@+id/edit_username_login_layout"
+        app:mtf_image="@drawable/ic_vpn_key_black_48dp"
         app:mtf_openKeyboardOnFocus="true">
         <EditText
-            android:id="@+id/editPassword"
+            android:id="@+id/edit_password_login"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:text="INVIA"
         android:id="@+id/bSubmit"
-        android:layout_below="@+id/editPassword_layout"
+        android:layout_below="@+id/edit_password_login_layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:onClick="loginToJson" />
@@ -91,7 +91,7 @@
             android:text="Non sei registrato?"
             android:id="@+id/tv_not_registered"
             android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/editPassword_layout"
+            android:layout_alignLeft="@+id/edit_password_login_layout"
             android:layout_alignParentLeft="true"
             android:textSize="15dp" />
 
@@ -101,7 +101,7 @@
             android:text="Registrati"
             android:id="@+id/tv_register"
             android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/editPassword_layout"
+            android:layout_alignLeft="@+id/edit_password_login_layout"
             android:layout_alignParentLeft="true"
             android:textStyle="bold"
             android:onClick="launchRegister"

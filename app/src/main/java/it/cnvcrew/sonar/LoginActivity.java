@@ -1,32 +1,28 @@
 package it.cnvcrew.sonar;
 
-import android.app.Application;
-import android.app.Activity;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.github.florent37.materialtextfield.MaterialTextField;
 import com.google.gson.Gson;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -62,8 +58,19 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
         LoginHandler handler = new LoginHandler();
         handler.addListener(this);
 
-        String user = ((EditText) findViewById(R.id.editUsername)).getText().toString();
-        String pass = ((EditText) findViewById(R.id.editPassword)).getText().toString();
+        String user = ((EditText) findViewById(R.id.edit_username_login)).getText().toString();
+        String pass = ((EditText) findViewById(R.id.edit_password_login)).getText().toString();
+        MaterialTextField mtfuser = (MaterialTextField) findViewById(R.id.edit_username_login_layout);
+        MaterialTextField mtfpass = (MaterialTextField) findViewById(R.id.edit_password_login_layout);
+        Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        if(user.length()==0) {
+            ((EditText) findViewById(R.id.edit_username_login)).setError("Username vuoto");
+            mtfuser.startAnimation(shake);
+        }
+        if(pass.length()==0) {
+            ((EditText) findViewById(R.id.edit_password_login)).setError("Password vuota");
+            mtfpass.startAnimation(shake);
+        }
         login.setUsername(user);
         login.setPassword(pass);
         sharedPrefsEditor.putString("username",user);
@@ -100,7 +107,13 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
                 this.startActivity(mainActivityIntent);
                 this.finish();
             }else{
-//                Toast errorToast = Toast.makeText(this,"Login errato",Toast.LENGTH_LONG);
+                Snackbar.make(this.findViewById(R.id.bSubmit),
+                        "Login Errato.\nAttenzione: il login è case-sensitive!",
+                        Snackbar.LENGTH_LONG).show();
+                findViewById(R.id.edit_username_login_layout)
+                        .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
+                findViewById(R.id.edit_password_login_layout)
+                        .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
                 Log.i("Result","ko");
             }
         }catch(Exception e){

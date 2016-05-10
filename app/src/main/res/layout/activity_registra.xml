@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- TODO uniformare nome variabili su modello tipoview_nomeview_register -->
+
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,7 +26,7 @@
         <com.github.florent37.materialtextfield.MaterialTextField
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editUsername_layout"
+            android:id="@+id/edit_username_register_layout"
             android:layout_marginTop="20dp"
             android:layout_below="@id/imgLogo"
             android:layout_centerHorizontal="true"
@@ -35,7 +38,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/editUsername"
+                android:id="@+id/edit_username_register"
                 android:hint="Username"
                 android:inputType="text"
                 android:text="cavaliere" />
@@ -50,7 +53,7 @@
             android:layout_marginRight="20dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/editUsername_layout"
+            android:layout_below="@+id/edit_username_register_layout"
             app:mtf_openKeyboardOnFocus="true">
             <EditText
                 android:layout_width="match_parent"
@@ -151,7 +154,7 @@
         <com.github.florent37.materialtextfield.MaterialTextField
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editPsw_layout"
+            android:id="@+id/edit_password_register_layout"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -160,7 +163,7 @@
             android:layout_below="@+id/editEmail_layout"
             app:mtf_openKeyboardOnFocus="true">
             <EditText
-                android:id="@+id/editPsw"
+                android:id="@+id/edit_password_register"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Password"
@@ -177,7 +180,7 @@
             android:layout_marginRight="20dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/editPsw_layout"
+            android:layout_below="@+id/edit_password_register_layout"
             app:mtf_openKeyboardOnFocus="true">
             <EditText
                 android:id="@+id/editConfPsw"

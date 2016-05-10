@@ -2,9 +2,11 @@ package it.cnvcrew.sonar;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -21,6 +23,7 @@ import java.net.UnknownHostException;
 import java.sql.Date;
 import java.util.concurrent.TimeUnit;
 
+// TODO mettere errore/shake su campo vuoto come su login
 public class RegistraActivity extends AppCompatActivity implements ResponseListener{
 
     Gson gson = new Gson();
@@ -51,33 +54,76 @@ public class RegistraActivity extends AppCompatActivity implements ResponseListe
 
         String username,nome,cognome,email,password,confermapassword;
         int yob,mob,dayob;
+        boolean emptyField = false;
 
         yob = Integer.parseInt(((Spinner) findViewById(R.id.spinner_anni)).getSelectedItem().toString());
         mob = Integer.parseInt(((Spinner) findViewById(R.id.spinner_mesi)).getSelectedItem().toString());
         dayob = Integer.parseInt(((Spinner) findViewById(R.id.spinner_giorni)).getSelectedItem().toString());
 
-        username = ((EditText) findViewById(R.id.editUsername)).getText().toString();
+        username = ((EditText) findViewById(R.id.edit_username_register)).getText().toString();
         nome = ((EditText) findViewById(R.id.editName)).getText().toString();
         cognome = ((EditText) findViewById(R.id.editSurname)).getText().toString();
         email = ((EditText) findViewById(R.id.editEmail)).getText().toString();
-        password = ((EditText) findViewById(R.id.editPsw)).getText().toString();
+        password = ((EditText) findViewById(R.id.edit_password_register)).getText().toString();
         confermapassword = ((EditText) findViewById(R.id.editConfPsw)).getText().toString();
+
+        if(username.length() == 0){
+            findViewById(R.id.edit_username_register_layout)
+                    .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
+            ((EditText) findViewById(R.id.edit_username_register)).setError("Campo vuoto");
+            emptyField = true;
+        }
+        if(nome.length() == 0){
+            findViewById(R.id.editName_layout)
+                    .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
+            ((EditText) findViewById(R.id.editName)).setError("Campo vuoto");
+            emptyField = true;
+        }
+        if(cognome.length() == 0){
+            findViewById(R.id.editSurname_layout)
+                    .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
+            ((EditText) findViewById(R.id.editSurname)).setError("Campo vuoto");
+            emptyField = true;
+        }
+        if(email.length() == 0){
+            findViewById(R.id.editEmail_layout)
+                    .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
+            ((EditText) findViewById(R.id.editEmail)).setError("Campo vuoto");
+            emptyField = true;
+        }
+        if(password.length() == 0){
+            findViewById(R.id.edit_password_register_layout)
+                    .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
+            ((EditText) findViewById(R.id.edit_password_register)).setError("Campo vuoto");
+            emptyField = true;
+        }
+
+        if(confermapassword.length() == 0){
+            findViewById(R.id.editConfPsw_layout)
+                    .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
+            ((EditText) findViewById(R.id.editConfPsw)).setError("Campo vuoto");
+            emptyField = true;
+        }
+
         Log.i("password", password);
         Log.i("conferma password", confermapassword);
         Date dob = new Date(yob,mob,dayob);
 
-        User toRegister = new User(nome, cognome, username, email, password, dob);
+        if(emptyField == false) {
+            User toRegister = new User(nome, cognome, username, email, password, dob);
 
-        if(password.equals(confermapassword)){
-            String jsonString = gson.toJson(toRegister);
-            Log.i("json", jsonString);
-            SignUpHandler handler = new SignUpHandler();
-            handler.addListener(this);
+            if (password.equals(confermapassword)) {
+                String jsonString = gson.toJson(toRegister);
+                Log.i("json", jsonString);
+                SignUpHandler handler = new SignUpHandler();
+                handler.addListener(this);
 
-            handler.connect(jsonString);
-        }
-        else{
-            Log.e("register","password non collimanti");
+                handler.connect(jsonString);
+            } else {
+                Log.e("register", "password non collimanti");
+            }
+        }else{
+            Snackbar.make(findViewById(R.id.bSubmit),"E' necessario compilare tutti i campi",Snackbar.LENGTH_LONG).show();
         }
 
     }
