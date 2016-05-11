@@ -146,20 +146,20 @@ class LoginHandler extends AsyncTask<String, String, String> {
                 .build();
         try {
             Log.i("listener reference",listener.toString());
-            //this.publishProgress("richiesta");
+            this.publishProgress("33");
             response = http.newCall(request).execute();
-            this.publishProgress("risposta");
+            this.publishProgress("66");
             listener.onApiResponseReceived(response);
             Log.i("response",response.toString());
             Log.i("response body",response.body().string());
             ritorno = response.toString();
         }catch(UnknownHostException e){
             Log.e("Request exception","Host sconosciuto");
-            this.publishProgress("HOST SCONOSCIUTO");
+            this.publishProgress("-1");
             ritorno = "unknownhost";
         }catch(IOException e){
             Log.e("Request exception","IOException");
-            this.publishProgress("Errore di I/O");
+            this.publishProgress("-1");
             ritorno = "ioexception";
         }
         return ritorno;
