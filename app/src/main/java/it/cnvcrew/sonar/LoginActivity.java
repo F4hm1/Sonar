@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
                 this.startActivity(mainActivityIntent);
                 this.finish();
             }else{
-                Snackbar.make(this.findViewById(R.id.bSubmit),
+                Snackbar.make(this.findViewById(R.id.btn_register),
                         "Login Errato.\nAttenzione: il login è case-sensitive!",
                         Snackbar.LENGTH_LONG).show();
                 findViewById(R.id.edit_username_login_layout)

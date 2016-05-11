@@ -2,39 +2,26 @@ package it.cnvcrew.sonar;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfiloFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfiloFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 
 public class ProfiloFragment extends Fragment {
 
     private SharedPreferences sharedPrefs;
+    private String name, surname;
 
-    public ProfiloFragment() {
-        // Required empty public constructor
+    public ProfiloFragment(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public ProfiloFragment(){
+
     }
 
     @Override
@@ -45,9 +32,8 @@ public class ProfiloFragment extends Fragment {
         sharedPrefs = getActivity().getSharedPreferences(Resources.SHARED_PREFERENCES, Context.MODE_PRIVATE);
 
         //Set name and surname TextView with user's name and surname
-        //TODO cambiare porcamadonna
-        ((TextView) v.findViewById(R.id.tvNome)).setText(MyNavigationDrawer.name);
-        ((TextView) v.findViewById(R.id.tvCognome)).setText(MyNavigationDrawer.surname);
+        ((TextView) v.findViewById(R.id.tvNome)).setText(name);
+        ((TextView) v.findViewById(R.id.tvCognome)).setText(surname);
 
         //Blur background image of the header
         BlurImage blurImage = new BlurImage();

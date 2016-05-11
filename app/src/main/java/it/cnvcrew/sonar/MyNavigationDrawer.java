@@ -1,12 +1,11 @@
 package it.cnvcrew.sonar;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import com.google.gson.Gson;
 
@@ -38,7 +37,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         surname = user.getCognome();
         email = user.getEmail();
 
-        profiloFragment = new ProfiloFragment();
+        profiloFragment = new ProfiloFragment(name, surname);
         eventsFragment = new EventsFragment();
         settingsFragment = new SettingsFragment();
         logoutFragment = new LogoutFragment();

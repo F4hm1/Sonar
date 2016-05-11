@@ -23,7 +23,6 @@ import java.net.UnknownHostException;
 import java.sql.Date;
 import java.util.concurrent.TimeUnit;
 
-// TODO mettere errore/shake su campo vuoto come su login
 public class RegistraActivity extends AppCompatActivity implements ResponseListener{
 
     Gson gson = new Gson();
@@ -33,17 +32,17 @@ public class RegistraActivity extends AppCompatActivity implements ResponseListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registra);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_giorni);
+        Spinner spinner = (Spinner) findViewById(R.id.sp_days_register);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.giorni_trentuno, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        spinner = (Spinner) findViewById(R.id.spinner_mesi);
+        spinner = (Spinner) findViewById(R.id.sp_months_register);
         adapter = ArrayAdapter.createFromResource(this, R.array.mesi, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        spinner = (Spinner) findViewById(R.id.spinner_anni);
+        spinner = (Spinner) findViewById(R.id.sp_years_register);
         adapter = ArrayAdapter.createFromResource(this, R.array.anni, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -56,52 +55,52 @@ public class RegistraActivity extends AppCompatActivity implements ResponseListe
         int yob,mob,dayob;
         boolean emptyField = false;
 
-        yob = Integer.parseInt(((Spinner) findViewById(R.id.spinner_anni)).getSelectedItem().toString());
-        mob = Integer.parseInt(((Spinner) findViewById(R.id.spinner_mesi)).getSelectedItem().toString());
-        dayob = Integer.parseInt(((Spinner) findViewById(R.id.spinner_giorni)).getSelectedItem().toString());
+        yob = Integer.parseInt(((Spinner) findViewById(R.id.sp_years_register)).getSelectedItem().toString());
+        mob = Integer.parseInt(((Spinner) findViewById(R.id.sp_months_register)).getSelectedItem().toString());
+        dayob = Integer.parseInt(((Spinner) findViewById(R.id.sp_days_register)).getSelectedItem().toString());
 
-        username = ((EditText) findViewById(R.id.edit_username_register)).getText().toString();
-        nome = ((EditText) findViewById(R.id.editName)).getText().toString();
-        cognome = ((EditText) findViewById(R.id.editSurname)).getText().toString();
+        username = ((EditText) findViewById(R.id.et_username_register)).getText().toString();
+        nome = ((EditText) findViewById(R.id.et_name_register)).getText().toString();
+        cognome = ((EditText) findViewById(R.id.et_surname_register)).getText().toString();
         email = ((EditText) findViewById(R.id.editEmail)).getText().toString();
-        password = ((EditText) findViewById(R.id.edit_password_register)).getText().toString();
-        confermapassword = ((EditText) findViewById(R.id.editConfPsw)).getText().toString();
+        password = ((EditText) findViewById(R.id.et_password_register)).getText().toString();
+        confermapassword = ((EditText) findViewById(R.id.et_repeatpassword_register)).getText().toString();
 
         if(username.length() == 0){
-            findViewById(R.id.edit_username_register_layout)
+            findViewById(R.id.et_username_register_layout)
                     .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
-            ((EditText) findViewById(R.id.edit_username_register)).setError("Campo vuoto");
+            ((EditText) findViewById(R.id.et_username_register)).setError("Campo vuoto");
             emptyField = true;
         }
         if(nome.length() == 0){
-            findViewById(R.id.editName_layout)
+            findViewById(R.id.et_name_register_layout)
                     .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
-            ((EditText) findViewById(R.id.editName)).setError("Campo vuoto");
+            ((EditText) findViewById(R.id.et_name_register)).setError("Campo vuoto");
             emptyField = true;
         }
         if(cognome.length() == 0){
-            findViewById(R.id.editSurname_layout)
+            findViewById(R.id.et_surname_register_layout)
                     .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
-            ((EditText) findViewById(R.id.editSurname)).setError("Campo vuoto");
+            ((EditText) findViewById(R.id.et_surname_register)).setError("Campo vuoto");
             emptyField = true;
         }
         if(email.length() == 0){
-            findViewById(R.id.editEmail_layout)
+            findViewById(R.id.et_email_register_layout)
                     .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
             ((EditText) findViewById(R.id.editEmail)).setError("Campo vuoto");
             emptyField = true;
         }
         if(password.length() == 0){
-            findViewById(R.id.edit_password_register_layout)
+            findViewById(R.id.et_password_register_layout)
                     .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
-            ((EditText) findViewById(R.id.edit_password_register)).setError("Campo vuoto");
+            ((EditText) findViewById(R.id.et_password_register)).setError("Campo vuoto");
             emptyField = true;
         }
 
         if(confermapassword.length() == 0){
-            findViewById(R.id.editConfPsw_layout)
+            findViewById(R.id.et_repeatpassword_register_layout)
                     .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
-            ((EditText) findViewById(R.id.editConfPsw)).setError("Campo vuoto");
+            ((EditText) findViewById(R.id.et_repeatpassword_register)).setError("Campo vuoto");
             emptyField = true;
         }
 
@@ -123,7 +122,7 @@ public class RegistraActivity extends AppCompatActivity implements ResponseListe
                 Log.e("register", "password non collimanti");
             }
         }else{
-            Snackbar.make(findViewById(R.id.bSubmit),"E' necessario compilare tutti i campi",Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.btn_register),"E' necessario compilare tutti i campi",Snackbar.LENGTH_LONG).show();
         }
 
     }

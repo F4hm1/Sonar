@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:id="@+id/imgLogo"
+        android:id="@+id/iv_logo_register"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/edit_username_login_layout"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/imgLogo"
+        android:layout_below="@id/iv_logo_register"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -69,10 +69,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="INVIA"
-        android:id="@+id/bSubmit"
+        android:id="@+id/btn_register"
         android:layout_below="@+id/edit_password_login_layout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:onClick="loginToJson" />
 
     <LinearLayout
