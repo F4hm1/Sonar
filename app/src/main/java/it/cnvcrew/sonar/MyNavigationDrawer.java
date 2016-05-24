@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
@@ -29,9 +30,12 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
 
     @Override
     public void init(Bundle savedInstanceState) {
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         Intent receivedIntent = getIntent();
         String loginResponse = receivedIntent.getStringExtra("userJson");
         User user = gson.fromJson(loginResponse, User.class);
+        mFirebaseAnalytics.setUserId(String.valueOf(user.getId()) + user.getNome() + user.getCognome());
         name = user.getNome();
         surname = user.getCognome();
         email = user.getEmail();
