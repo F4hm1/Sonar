@@ -3,10 +3,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import com.google.gson.Gson;
 
@@ -21,7 +19,7 @@ import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 public class MyNavigationDrawer extends MaterialNavigationDrawer {
     Gson gson = new Gson();
 
-    private ProfiloFragment profiloFragment;
+    private ProfileFragment ProfileFragment;
     private SettingsFragment settingsFragment;
     private EventsFragment eventsFragment;
     private LogoutFragment logoutFragment;
@@ -38,7 +36,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         surname = user.getCognome();
         email = user.getEmail();
 
-        profiloFragment = new ProfiloFragment();
+        ProfileFragment = new ProfileFragment();
         eventsFragment = new EventsFragment();
         settingsFragment = new SettingsFragment();
         logoutFragment = new LogoutFragment();
@@ -60,7 +58,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         //Account
         MaterialAccount account = new MaterialAccount(this.getResources(),name + " " + surname,email,R.drawable.cnv, R.drawable.sunsetswerve);
         //Items
-        MaterialSection accountSection = newSection("Profilo", R.drawable.ic_account, profiloFragment);
+        MaterialSection accountSection = newSection("Profilo", R.drawable.ic_account, ProfileFragment);
         MaterialSection geoSection = newSection("Posizione", R.drawable.ic_position, positionFragment);
         MaterialSection eventSection = newSection("Eventi", R.drawable.ic_events, eventsFragment);
         MaterialSection settingSection = newSection("Impostazioni", R.drawable.ic_settings, settingsFragment);

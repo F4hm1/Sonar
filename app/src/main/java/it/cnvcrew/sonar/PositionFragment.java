@@ -25,8 +25,11 @@ import com.google.android.gms.location.LocationServices;
 import android.location.Location;
 import android.location.LocationManager;
 
+import com.lambdaworks.redis.*;
+
 public class PositionFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, View.OnClickListener, android.location.LocationListener, com.google.android.gms.location.LocationListener {
 
+    //TODO improve permission handling
     private GoogleApiClient gAPIClient;
     private Location lastLocation;
     private View layout;
@@ -89,6 +92,7 @@ public class PositionFragment extends Fragment implements GoogleApiClient.Connec
                         LocationServices.FusedLocationApi.requestLocationUpdates(gAPIClient, new LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY), this);
                         lastLocation = LocationServices.FusedLocationApi.getLastLocation(
                                 gAPIClient);
+                        RedisClient redis = new RedisClient("http://127.0.0.1", 8888);
                     }catch(SecurityException e){
 
                     }

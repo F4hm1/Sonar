@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.florent37.materialtextfield.MaterialTextField;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
@@ -49,6 +50,13 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
         SpannableString content = new SpannableString(udata);
         content.setSpan(new UnderlineSpan(), 0, udata.length(), 0);
         ((TextView) findViewById(R.id.tv_register)).setText(content);
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, R.id.bSubmit);
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "invia");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "button");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
     }
 
     public void loginToJson(View v) throws Exception{
@@ -99,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
             User user = gson.fromJson(responseString,User.class);
             Log.i("Received JSON",responseString);
             Log.i("Received user", user.toString());
-            if(user.getId()!=-1) {
+            if(user.getId()!= -1 /*|| user.getId() == null*/) {
                 sharedPrefsEditor.apply();
                 Log.i("SharedPrefs","Written");
                 Intent mainActivityIntent = new Intent(this, MyNavigationDrawer.class);
