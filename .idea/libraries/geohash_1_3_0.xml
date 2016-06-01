@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="geohash-1.3.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.hsr/geohash/1.3.0/aa98ad806e1179f7e88b566142a7c85b2fe3cc89/geohash-1.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.hsr/geohash/1.3.0/9232928f489078ed147764b251a101fc972527b/geohash-1.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,10 +1,5 @@
 package it.cnvcrew.sonar;
 
-import android.app.Application;
-import android.app.Activity;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,8 +16,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.github.florent37.materialtextfield.MaterialTextField;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.github.florent37.materialtextfield.MaterialTextField;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
@@ -115,6 +108,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
             Log.i("Received JSON",responseString);
             Log.i("Received user", user.toString());
             if(user.getId()!= -1 /*|| user.getId() == null*/) {
+                sharedPrefsEditor.putInt("userId",user.getId());
                 sharedPrefsEditor.apply();
                 Log.i("SharedPrefs","Written");
                 Intent mainActivityIntent = new Intent(this, MyNavigationDrawer.class);
