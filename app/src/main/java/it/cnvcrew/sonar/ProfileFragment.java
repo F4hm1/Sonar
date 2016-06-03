@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -33,6 +34,9 @@ public class ProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profilo, container, false);
         //Get SharedPreferences
         sharedPrefs = getActivity().getSharedPreferences(Resources.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        //((ImageView) v.findViewById(R.id.profile_img)).setImageBitmap(MyNavigationDrawer.loggedUser.getProfile());
+
+        ((ImageView) v.findViewById(R.id.profile_img)).setImageBitmap(MyNavigationDrawer.profilePic);
 
         //Set name and surname TextView with user's name and surname
         //TODO cambiare porcamadonna

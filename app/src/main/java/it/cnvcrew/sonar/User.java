@@ -1,5 +1,10 @@
 package it.cnvcrew.sonar;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -9,15 +14,20 @@ import java.sql.Date;
 public class User implements Serializable {
 
     String nome,cognome,username,email,password;
+    String image;
+    Bitmap imagebmp;
     int id;
     Date dob;
 
-    public User(int id, String nome, String cognome, String username, String email) {
+    public User(int id, String nome, String cognome, String username, String email, String image) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         this.username = username;
         this.email = email;
+        this.image = image;
+        byte[] imgBytes = Base64.decode(image, 0);
+        this.imagebmp = BitmapFactory.decodeByteArray(imgBytes, 0, imgBytes.length);
     }
 
     public User(String nome, String cognome, String username, String email, String password, Date dob) {
@@ -73,6 +83,28 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    public String getProfileBase64() {
+        return image;
+    }
+
+    public Bitmap getProfile(){
+        return imagebmp;
+    }
+
+    public void setProfile(Bitmap image) {
+        this.imagebmp = image;
+    }
+
+    public void setProfileBase64(String string){
+        this.image=string;
+        if(string.equals("file")){
+            imagebmp=null;
+        }else{
+            byte[] imgBytes = Base64.decode(image, 0);
+            this.imagebmp = BitmapFactory.decodeByteArray(imgBytes, 0, imgBytes.length);
+        }
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -80,7 +112,8 @@ public class User implements Serializable {
                 ", cognome='" + cognome + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", id=" + id +
+                ", id=" + id + '\'' +
+                ", image=" + getProfileBase64() +
                 '}';
     }
 }

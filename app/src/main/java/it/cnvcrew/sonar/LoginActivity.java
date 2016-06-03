@@ -25,6 +25,8 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
@@ -94,8 +96,6 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
                 intent.putExtra("userJson", sharedPrefs.getString("user",null));
                 this.startActivity(intent);
                 this.finish();
-            }else{
-                handler.connect(jsonString);
             }
         }
         handler.connect(jsonString);
@@ -104,8 +104,18 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
     public void onApiResponseReceived(Response response){
         try{
             String responseString = response.body().string();
-            User user = gson.fromJson(responseString,User.class);
             Log.i("Received JSON",responseString);
+            User user = gson.fromJson(responseString,User.class);
+            File imgProFile = new File(this.getFilesDir(), "profilePic");
+            try {
+                FileOutputStream outputStream = openFileOutput("profilePic", Context.MODE_PRIVATE);
+                outputStream.write(user.getProfileBase64().getBytes());
+                outputStream.close();
+                user.setProfileBase64("file");
+                Log.i("dir", this.getFilesDir().toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Log.i("Received user", user.toString());
             if(user.getId()!= -1 /*|| user.getId() == null*/) {
                 sharedPrefsEditor.putInt("userId",user.getId());
