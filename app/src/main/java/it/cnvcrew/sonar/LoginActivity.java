@@ -108,6 +108,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
             Log.i("Received JSON",responseString);
             Log.i("Received user", user.toString());
             if(user.getId()!= -1 /*|| user.getId() == null*/) {
+                sharedPrefsEditor.putInt("userId",user.getId());
                 sharedPrefsEditor.apply();
                 Log.i("SharedPrefs","Written");
                 Intent mainActivityIntent = new Intent(this, MyNavigationDrawer.class);

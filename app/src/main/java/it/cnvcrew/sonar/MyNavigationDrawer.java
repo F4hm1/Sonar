@@ -65,7 +65,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         MaterialSection accountSection = newSection("Profilo", R.drawable.ic_account, ProfileFragment);
         MaterialSection geoSection = newSection("Posizione", R.drawable.ic_position, positionFragment);
         MaterialSection eventSection = newSection("Eventi", R.drawable.ic_events, eventsFragment);
-        MaterialSection settingSection = newSection("Impostazioni", R.drawable.ic_settings, settingsFragment);
+        MaterialSection settingSection = newSection("Impostazioni", R.drawable.ic_settings, SettingsActivity.class);
         MaterialSection aboutSection = newSection("Info", R.drawable.ic_info, aboutFragment);
         MaterialSection logoutSection = newSection("Logout", logoutFragment);
         //Add section to nav drawer
