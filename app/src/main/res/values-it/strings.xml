@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sonar</string>
+    <string name="aboutgroup">Connettiti con noi</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="contact">Contattaci</string>
+    <string name="description">Descrizione</string>
+    <string name="dob">Data di nascita</string>
+    <string name="email">Email</string>
+    <string name="events">Eventi</string>
+    <string name="about">Info</string>
+    <string name="facebooklike">Metti "Mi Piace" su Facebook</string>
+    <string name="gitfork">Forkaci su GitHub</string>
+    <string name="instafollow">Seguici su Instagram</string>
+    <string name="logout">Logout</string>
+    <string name="name">Nome</string>
+    <string name="password">Password</string>
+    <string name="passwordconfirm">C</string>
+    <string name="position">Posizione</string>
+    <string name="profile">Profilo</string>
+    <string name="settings">Impostazioni</string>
+    <string name="signup">Registrati</string>
+    <string name="submit">Invia</string>
+    <string name="surname">Cognome</string>
+    <string name="title">Titolo</string>
+    <string name="twitterfollow">Seguici su Twitter</string>
+    <string name="unregistered">Non sei registrato?</string>
+    <string name="username">Username</string>
+    <string name="website">Visita il nostro sito</string>
+    <string name="football">Calcio</string>
+    <string name="sport">Sport</string>
+    <string name="music">Musica</string>
+    <string name="appearance">Aspetto</string>
+    <string name="update_interval">Intervallo aggiornamento</string>
+    <string name="notifications">Notifiche</string>
+    <string name="enable_notifications">Attiva notifiche</string>
+</resources>

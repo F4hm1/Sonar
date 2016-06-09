@@ -16,6 +16,8 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -63,9 +65,16 @@ public class SplashActivity extends Activity {
                 }
                 try {
                     String responseString = response.body().string();
+                    Log.i("Received user JSON",responseString);
                     User user = gson.fromJson(responseString, User.class);
                     Log.i("Received user", user.toString());
+                    //File imgProFile = new File(this.getFilesDir(), "profilePic");
+                    FileOutputStream outputStream = openFileOutput("profilePic", Context.MODE_PRIVATE);
+                    outputStream.write(user.getProfileBase64().getBytes());
+                    outputStream.close();
+                    user.setProfileBase64("file");
                     if (user.getId() != -1) {
+
                         Intent mainActivityIntent = new Intent(activity, MyNavigationDrawer.class);
                         mainActivityIntent.putExtra("userJson", gson.toJson(user));
                         activity.startActivity(mainActivityIntent);

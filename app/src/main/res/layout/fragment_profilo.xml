@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:clickable="true"
-    tools:context="it.cnvcrew.sonar.ProfiloFragment">
+    tools:context=".ProfileFragment">
 
     <ImageView
         android:id="@+id/profile_img_blur"
@@ -40,6 +40,7 @@
             android:layout_marginBottom="20dp" />-->
 
         <LinearLayout
+            android:id="@+id/ll_profile_header"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,5 +80,73 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sport"
+        android:id="@+id/tv_interest_sport"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/profile_img_blur"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/football"
+        android:id="@+id/cb_interest_football"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/tv_interest_sport"
+        android:layout_alignLeft="@+id/tv_interest_sport"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/music"
+        android:id="@+id/tv_interest_music"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/cb_interest_football"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/techno"
+        android:id="@+id/cb_interest_techno"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/tv_interest_music"
+        android:layout_alignLeft="@+id/tv_interest_music"
+        android:layout_marginLeft="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        android:id="@+id/btn_submit_interests"
+        android:layout_below="@+id/cb_interest_techno"
+        android:layout_centerHorizontal="true"
+        android:nestedScrollingEnabled="false" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Switch"
+        android:id="@+id/switch2"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_centerVertical="true"
+        android:splitTrack="false"
+        android:switchPadding="20dp"
+        android:thumbTint="#ff3d00"
+        android:trackTint="@color/about_instagram_color"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/btn_submit_interests"
+        android:layout_marginLeft="20dp"
+        android:layout_margin="20dp"
+        android:trackTintMode="src_atop" />
 
 </RelativeLayout>

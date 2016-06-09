@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.florent37.materialtextfield.MaterialTextField;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
@@ -24,6 +25,8 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
@@ -49,6 +52,13 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
         SpannableString content = new SpannableString(udata);
         content.setSpan(new UnderlineSpan(), 0, udata.length(), 0);
         ((TextView) findViewById(R.id.tv_register)).setText(content);
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, R.id.bSubmit);
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "invia");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "button");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
     }
 
     public void loginToJson(View v) throws Exception{
@@ -71,35 +81,50 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
             ((EditText) findViewById(R.id.edit_password_login)).setError("Password vuota");
             mtfpass.startAnimation(shake);
         }
-        login.setUsername(user);
-        login.setPassword(pass);
-        sharedPrefsEditor.putString("username",user);
-        sharedPrefsEditor.putString("password",pass);
-        String jsonString = gson.toJson(login);
-        Log.i("json", jsonString);
+        if(pass.length()!=0 && user.length()!=0) {                                                  /* esegui la richiesta solo se i campi non sono vuoti */
+            login.setUsername(user);
+            login.setPassword(pass);
+            sharedPrefsEditor.putString("username", user);
+            sharedPrefsEditor.putString("password", pass);
+            String jsonString = gson.toJson(login);
+            Log.i("json", jsonString);
 
-        if(sharedPrefs.contains("login")){
-            String userPrefs = sharedPrefs.getString("username",null);                              /* Se esiste un utente salvato */
-            String passPrefs = sharedPrefs.getString("password",null);
-            if(user.equals(userPrefs) && pass.equals(passPrefs)){
-                Intent intent = new Intent(this,MyNavigationDrawer.class);
-                intent.putExtra("userJson", sharedPrefs.getString("user",null));
-                this.startActivity(intent);
-                this.finish();
-            }else{
-                handler.connect(jsonString);
+            if (sharedPrefs.contains("login")) {
+                String userPrefs = sharedPrefs.getString("username", null);                              /* Se esiste un utente salvato */
+                String passPrefs = sharedPrefs.getString("password", null);
+                if (user.equals(userPrefs) && pass.equals(passPrefs)) {
+                    Intent intent = new Intent(this, MyNavigationDrawer.class);
+                    intent.putExtra("userJson", sharedPrefs.getString("user", null));
+                    this.startActivity(intent);
+                    this.finish();
+                }
             }
+            handler.connect(jsonString);
         }
-        handler.connect(jsonString);
     }
 
     public void onApiResponseReceived(Response response){
         try{
             String responseString = response.body().string();
-            User user = gson.fromJson(responseString,User.class);
             Log.i("Received JSON",responseString);
+            User user = gson.fromJson(responseString,User.class);
+            File imgProFile = new File(this.getFilesDir(), "profilePic");
+            try {
+                if(user.getProfileBase64() != null) {
+                    FileOutputStream outputStream = openFileOutput("profilePic", Context.MODE_PRIVATE);
+                    outputStream.write(user.getProfileBase64().getBytes());
+                    outputStream.close();
+                    user.setProfileBase64("file");
+                    Log.i("dir", this.getFilesDir().toString());
+                }else{
+                    Log.w("Profile pic","not received");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Log.i("Received user", user.toString());
-            if(user.getId()!=-1) {
+            if(user.getId()!= -1 /*|| user.getId() == null*/) {
+                sharedPrefsEditor.putInt("userId",user.getId());
                 sharedPrefsEditor.apply();
                 Log.i("SharedPrefs","Written");
                 Intent mainActivityIntent = new Intent(this, MyNavigationDrawer.class);

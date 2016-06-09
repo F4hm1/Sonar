@@ -20,7 +20,6 @@ import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.sql.Date;
 import java.util.concurrent.TimeUnit;
 
 public class RegistraActivity extends AppCompatActivity implements ResponseListener{
@@ -59,9 +58,19 @@ public class RegistraActivity extends AppCompatActivity implements ResponseListe
         mob = Integer.parseInt(((Spinner) findViewById(R.id.sp_months_register)).getSelectedItem().toString());
         dayob = Integer.parseInt(((Spinner) findViewById(R.id.sp_days_register)).getSelectedItem().toString());
 
+<<<<<<< HEAD
         username = ((EditText) findViewById(R.id.et_username_register)).getText().toString();
         nome = ((EditText) findViewById(R.id.et_name_register)).getText().toString();
         cognome = ((EditText) findViewById(R.id.et_surname_register)).getText().toString();
+=======
+        Log.i("YOB", String.valueOf(yob));
+        Log.i("MOB", String.valueOf(mob));
+        Log.i("DAYOB", String.valueOf(dayob));
+
+        username = ((EditText) findViewById(R.id.edit_username_register)).getText().toString();
+        nome = ((EditText) findViewById(R.id.editName)).getText().toString();
+        cognome = ((EditText) findViewById(R.id.editSurname)).getText().toString();
+>>>>>>> dev-alpha
         email = ((EditText) findViewById(R.id.editEmail)).getText().toString();
         password = ((EditText) findViewById(R.id.et_password_register)).getText().toString();
         confermapassword = ((EditText) findViewById(R.id.et_repeatpassword_register)).getText().toString();
@@ -106,7 +115,9 @@ public class RegistraActivity extends AppCompatActivity implements ResponseListe
 
         Log.i("password", password);
         Log.i("conferma password", confermapassword);
-        Date dob = new Date(yob,mob,dayob);
+        String dob = yob+"-"+mob+"-"+dayob;
+
+        Log.i("DATE",dob);
 
         if(emptyField == false) {
             User toRegister = new User(nome, cognome, username, email, password, dob);
@@ -129,7 +140,8 @@ public class RegistraActivity extends AppCompatActivity implements ResponseListe
 
     @Override
     public void onApiResponseReceived(Response response) {
-
+        Snackbar.make(this.findViewById(R.id.bSubmit),"Utente registrato con successo.",Snackbar.LENGTH_LONG);
+        this.finish();
     }
 }
 

@@ -35,6 +35,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_username_login"
             android:hint="Username"
+            android:inputType="text"
             android:textColor="#333"
             android:textColorHint="#666"
             android:textSize="15sp" />
@@ -72,8 +73,14 @@
         android:id="@+id/btn_register"
         android:layout_below="@+id/edit_password_login_layout"
         android:layout_centerHorizontal="true"
+<<<<<<< HEAD
         android:layout_marginTop="40dp"
         android:onClick="loginToJson" />
+=======
+        android:layout_marginTop="10dp"
+        android:onClick="loginToJson"
+        android:elevation="5dp" />
+>>>>>>> dev-alpha
 
     <LinearLayout
         android:orientation="horizontal"

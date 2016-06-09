@@ -1,5 +1,7 @@
 package it.cnvcrew.sonar;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
@@ -19,7 +21,12 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Element versionElement = new Element().setTitle("1.0");
+        PackageInfo pInfo = null;
+        try {
+            pInfo = this.getActivity().getPackageManager()
+                    .getPackageInfo(this.getActivity().getPackageName(), 0);        /*  Gets the version number */
+        }catch(PackageManager.NameNotFoundException e){}
+        Element versionElement = new Element().setTitle(pInfo.versionName);
         View aboutPage = new AboutPage(this.getContext())
                 .isRTL(false)
                 .setImage(R.drawable.cnv_logo)
