@@ -35,6 +35,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_username_login"
             android:hint="Username"
+            android:inputType="text"
             android:textColor="#333"
             android:textColorHint="#666"
             android:textSize="15sp" />

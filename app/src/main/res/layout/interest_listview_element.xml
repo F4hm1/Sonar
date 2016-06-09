@@ -3,18 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="50dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_interest_name"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="15dp" />
+
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Switch"
-        android:id="@+id/switch1"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false"
+        android:id="@+id/sw_is_checked"
         android:layout_centerVertical="true"
-        android:splitTrack="false"
-        android:switchPadding="20dp"
-        android:thumbTint="#ff3d00"
-        android:thumb="@drawable/abc_btn_radio_material"
-        android:trackTint="@color/about_instagram_color" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:checked="false" />
 </RelativeLayout>

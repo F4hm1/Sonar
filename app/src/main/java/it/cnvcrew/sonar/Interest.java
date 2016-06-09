@@ -5,14 +5,15 @@ package it.cnvcrew.sonar;
  */
 public class Interest {
 
-    private int id;
+    private int id, category_id;
     private String name;
-    private boolean isChecked;
+    private boolean is_selected;
 
-    public Interest(int id, String name, boolean isChecked) {
+    public Interest(int id, int category_id, String name, boolean is_selected) {
         this.id = id;
+        this.category_id = category_id;
         this.name = name;
-        this.isChecked = isChecked;
+        this.is_selected = is_selected;
     }
 
     public int getId() {
@@ -31,11 +32,21 @@ public class Interest {
         this.name = name;
     }
 
-    public boolean isChecked() {
-        return isChecked;
+    public boolean is_selected() {
+        return is_selected;
     }
 
     public void setChecked(boolean checked) {
-        isChecked = checked;
+        is_selected = checked;
+    }
+
+    @Override
+    public String toString() {
+        return "Interest{" +
+                "id=" + id +
+                ", category_id=" + category_id +
+                ", name='" + name + '\'' +
+                ", is_selected=" + is_selected +
+                '}';
     }
 }

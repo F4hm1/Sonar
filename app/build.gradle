@@ -2,12 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        config {
-            keyAlias 'test'
-            keyPassword 'tettarella'
-            storeFile file('C:/Users/Alessandro/Documents/test.jks')
-            storePassword 'tettarella'
-        }
     }
     compileSdkVersion 23
     buildToolsVersion "24.0.0-rc3"
@@ -26,7 +20,6 @@ android {
             debuggable false
             jniDebuggable false
             versionNameSuffix '-rls'
-            signingConfig signingConfigs.config
         }
         debug {
             jniDebuggable true

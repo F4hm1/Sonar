@@ -81,24 +81,26 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
             ((EditText) findViewById(R.id.edit_password_login)).setError("Password vuota");
             mtfpass.startAnimation(shake);
         }
-        login.setUsername(user);
-        login.setPassword(pass);
-        sharedPrefsEditor.putString("username",user);
-        sharedPrefsEditor.putString("password",pass);
-        String jsonString = gson.toJson(login);
-        Log.i("json", jsonString);
+        if(pass.length()!=0 && user.length()!=0) {                                                  /* esegui la richiesta solo se i campi non sono vuoti */
+            login.setUsername(user);
+            login.setPassword(pass);
+            sharedPrefsEditor.putString("username", user);
+            sharedPrefsEditor.putString("password", pass);
+            String jsonString = gson.toJson(login);
+            Log.i("json", jsonString);
 
-        if(sharedPrefs.contains("login")){
-            String userPrefs = sharedPrefs.getString("username",null);                              /* Se esiste un utente salvato */
-            String passPrefs = sharedPrefs.getString("password",null);
-            if(user.equals(userPrefs) && pass.equals(passPrefs)){
-                Intent intent = new Intent(this,MyNavigationDrawer.class);
-                intent.putExtra("userJson", sharedPrefs.getString("user",null));
-                this.startActivity(intent);
-                this.finish();
+            if (sharedPrefs.contains("login")) {
+                String userPrefs = sharedPrefs.getString("username", null);                              /* Se esiste un utente salvato */
+                String passPrefs = sharedPrefs.getString("password", null);
+                if (user.equals(userPrefs) && pass.equals(passPrefs)) {
+                    Intent intent = new Intent(this, MyNavigationDrawer.class);
+                    intent.putExtra("userJson", sharedPrefs.getString("user", null));
+                    this.startActivity(intent);
+                    this.finish();
+                }
             }
+            handler.connect(jsonString);
         }
-        handler.connect(jsonString);
     }
 
     public void onApiResponseReceived(Response response){
@@ -108,11 +110,15 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
             User user = gson.fromJson(responseString,User.class);
             File imgProFile = new File(this.getFilesDir(), "profilePic");
             try {
-                FileOutputStream outputStream = openFileOutput("profilePic", Context.MODE_PRIVATE);
-                outputStream.write(user.getProfileBase64().getBytes());
-                outputStream.close();
-                user.setProfileBase64("file");
-                Log.i("dir", this.getFilesDir().toString());
+                if(user.getProfileBase64() != null) {
+                    FileOutputStream outputStream = openFileOutput("profilePic", Context.MODE_PRIVATE);
+                    outputStream.write(user.getProfileBase64().getBytes());
+                    outputStream.close();
+                    user.setProfileBase64("file");
+                    Log.i("dir", this.getFilesDir().toString());
+                }else{
+                    Log.w("Profile pic","not received");
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -4,20 +4,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
-import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
-import java.sql.Date;
 
 /**
  * Created by Alessandro on 31/03/2016.
  */
 public class User implements Serializable {
 
-    String nome,cognome,username,email,password;
+    String nome,cognome,username,email,password,dob;
     String image;
     Bitmap imagebmp;
     int id;
-    Date dob;
 
     public User(int id, String nome, String cognome, String username, String email, String image) {
         this.id = id;
@@ -30,7 +27,7 @@ public class User implements Serializable {
         this.imagebmp = BitmapFactory.decodeByteArray(imgBytes, 0, imgBytes.length);
     }
 
-    public User(String nome, String cognome, String username, String email, String password, Date dob) {
+    public User(String nome, String cognome, String username, String email, String password, String dob) {
         this.nome = nome;
         this.cognome = cognome;
         this.username = username;

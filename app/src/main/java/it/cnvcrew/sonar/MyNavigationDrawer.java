@@ -1,4 +1,5 @@
 package it.cnvcrew.sonar;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,14 +8,11 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -107,11 +105,19 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         if(getCurrentSection().getTitle().equals("Eventi")) {
             getMenuInflater().inflate(R.menu.menu_fragment_eventi, menu);
         }
+        if(getCurrentSection().getTitle().equals("Profilo")) {
+            getMenuInflater().inflate(R.menu.menu_fragment_profilo, menu);
+        }
         return true;
     }
 
     public void newEvent(MenuItem menuItem){
         Intent i = new Intent(this, CreateNewEventActivity.class);
+        startActivity(i);
+    }
+
+    public void openInterests(MenuItem menuItem){
+        Intent i = new Intent(this, InterestsActivity.class);
         startActivity(i);
     }
 
