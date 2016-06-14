@@ -6,13 +6,14 @@ package it.cnvcrew.sonar;
 public class Interest {
 
     private int id, category_id;
-    private String name;
+    private String name, category_name;
     private boolean is_selected;
 
-    public Interest(int id, int category_id, String name, boolean is_selected) {
+    public Interest(int id, int category_id, String name, String category_name, boolean is_selected) {
         this.id = id;
         this.category_id = category_id;
         this.name = name;
+        this.category_name = category_name;
         this.is_selected = is_selected;
     }
 
@@ -44,12 +45,21 @@ public class Interest {
 
     public void setCategory_id(int category_id) { this.category_id = category_id; }
 
+    public String getCategory_name() {
+        return category_name;
+    }
+
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
+    }
+
     @Override
     public String toString() {
         return "Interest{" +
                 "id=" + id +
-                ", category_id=" + category_id +
-                ", name='" + name + '\'' +
+                ", category id=" + category_id +
+                ", name=" + name +
+                ", category name=" + category_name +
                 ", is_selected=" + is_selected +
                 '}';
     }

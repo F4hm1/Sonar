@@ -3,6 +3,9 @@ package it.cnvcrew.sonar;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,15 +74,15 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
 
     @Override
     public void onApiResponseReceived(Response response) {
-        Category[] categories;
+        final Category[] categories;
         try {
             String risposta = response.body().string();
             Log.i("Interest response",risposta);
             interests = gson.fromJson(risposta,Interest[].class);
             int nCategories = 0;
             try{
-                JSONArray userArray = new JSONArray(risposta);
-                JSONObject userObject = userArray.getJSONObject(userArray.length()-1);
+                JSONArray categoryArray = new JSONArray(risposta);
+                JSONObject userObject = categoryArray.getJSONObject(categoryArray.length()-1);
                 nCategories = userObject.getInt("numero");
                 Log.i("numero",String.valueOf(nCategories));
             }catch(JSONException e){
@@ -89,8 +92,9 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
                 this.finish();
             }
             categories = new Category[nCategories];
+            Log.i("catname",interests[0].getCategory_name());
             for(int i = 0; i < nCategories; i++) {
-                categories[i] = new Category(i+1);
+                categories[i] = new Category(i+1, interests[i].getCategory_name());
                 for (int j = 0; j<interests.length; j++){
                     if(interests[j].getCategory_id() == i+1){
                         categories[i].setInterests(interests[j]);
@@ -98,6 +102,19 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
                     }
                 }
             }
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_category_interests);
+
+                    CategoryRecyclerViewAdapter adapter = new CategoryRecyclerViewAdapter(categories, getApplicationContext());
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(adapter);
+                }
+            });
 
         }catch(IOException e){
             Log.e("Interest response error",e.toString());
