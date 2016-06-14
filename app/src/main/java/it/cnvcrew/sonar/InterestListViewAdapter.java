@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Switch;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 /**
@@ -28,9 +28,11 @@ public class InterestListViewAdapter  extends ArrayAdapter<Interest>{
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.interest_listview_element, parent, false);          /* Imposta il layout di un singolo elemento */
         TextView tv_name = (TextView) convertView.findViewById(R.id.tv_interest_name);
-        Switch sw_isChecked = (Switch) convertView.findViewById(R.id.sw_is_checked);
+        //Switch sw_isChecked = (Switch) convertView.findViewById(R.id.sw_is_checked);
+        CheckBox cb_isSelected = (CheckBox) convertView.findViewById(R.id.cb_is_selected);
         tv_name.setText(interests[position].getName());
-        sw_isChecked.setChecked(interests[position].is_selected());
+        //sw_isChecked.setChecked(interests[position].is_selected());
+        cb_isSelected.setChecked(interests[position].is_selected());
         return convertView;
     }
 
