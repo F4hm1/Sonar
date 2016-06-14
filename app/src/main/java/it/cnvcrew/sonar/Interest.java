@@ -40,6 +40,10 @@ public class Interest {
         is_selected = checked;
     }
 
+    public int getCategory_id() { return category_id; }
+
+    public void setCategory_id(int category_id) { this.category_id = category_id; }
+
     @Override
     public String toString() {
         return "Interest{" +
