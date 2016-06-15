@@ -1,9 +1,12 @@
 package it.cnvcrew.sonar;
 
+import android.util.Log;
+import android.widget.CompoundButton;
+
 /**
  * Created by Alessandro on 14/05/2016.
  */
-public class Interest {
+public class Interest implements CompoundButton.OnCheckedChangeListener{
 
     private int id, category_id;
     private String name, category_name;
@@ -62,5 +65,11 @@ public class Interest {
                 ", category name=" + category_name +
                 ", is_selected=" + is_selected +
                 '}';
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        this.is_selected = isChecked;
+        Log.i("is_selected set to",String.valueOf(isChecked));
     }
 }

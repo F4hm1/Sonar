@@ -36,7 +36,7 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interests);
 
-        InterestHandler handler = new InterestHandler();
+        GetInterestHandler handler = new GetInterestHandler();
         handler.addListener(this);
         Log.i("interest request",gson.toJson(MyNavigationDrawer.loggedUser));
         handler.connect(gson.toJson(MyNavigationDrawer.loggedUser));
@@ -56,20 +56,30 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
             case R.id.btn_interests_refresh:
                 Toast.makeText(this, "Refresh", Toast.LENGTH_LONG).show();
                 Log.i("interest refresh",gson.toJson(MyNavigationDrawer.loggedUser));
-                InterestHandler handler = new InterestHandler();
-                handler.addListener(this);
-                handler.connect(gson.toJson(MyNavigationDrawer.loggedUser));
+                GetInterestHandler getHandler = new GetInterestHandler();
+                getHandler.addListener(this);
+                getHandler.connect(gson.toJson(MyNavigationDrawer.loggedUser));
                 break;
             case R.id.btn_interests_submit:
                 Toast.makeText(this, "Submit", Toast.LENGTH_LONG).show();
-
+                SendInterestHandler sendHandler= new SendInterestHandler();
+                String json = gson.toJson(interests);
+                JSONObject object = null;
+                JSONArray array = null;
+                try{
+                    array = new JSONArray(json);
+                    object = new JSONObject();
+                    object.put("interests",array);
+                    object.put("user_id",MyNavigationDrawer.loggedUser.getId());
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+                json = object.toString();
+                sendHandler.addListener(this);
+                sendHandler.connect(json);
                 break;
         }
         return true;
-    }
-
-    public void setListview(){
-
     }
 
     @Override
@@ -78,51 +88,61 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
         try {
             String risposta = response.body().string();
             Log.i("Interest response",risposta);
-            interests = gson.fromJson(risposta,Interest[].class);
-            int nCategories = 0;
-            try{
-                JSONArray categoryArray = new JSONArray(risposta);
-                JSONObject userObject = categoryArray.getJSONObject(categoryArray.length()-1);
-                nCategories = userObject.getInt("numero");
-                Log.i("numero",String.valueOf(nCategories));
-            }catch(JSONException e){
-                e.printStackTrace();
-            }
-            if(nCategories == 0){
-                this.finish();
-            }
-            categories = new Category[nCategories];
-            Log.i("catname",interests[0].getCategory_name());
-            for(int i = 0; i < nCategories; i++) {
-                categories[i] = new Category(i+1, interests[i].getCategory_name());
-                for (int j = 0; j<interests.length; j++){
-                    if(interests[j].getCategory_id() == i+1){
-                        categories[i].setInterests(interests[j]);
-                        Log.i("interest", interests[i].toString());
+            JSONArray array = new JSONArray(risposta);
+            JSONObject object = array.getJSONObject(array.length() - 1);
+            Log.i("operation",object.getString("operation"));
+            if(object.getString("operation").equals("get")) {
+                Log.i("Interest","getting");
+                interests = gson.fromJson(risposta, Interest[].class);
+                int nCategories = 0;
+                try {
+                    JSONArray categoryArray = new JSONArray(risposta);
+                    JSONObject userObject = categoryArray.getJSONObject(categoryArray.length() - 2);
+                    nCategories = userObject.getInt("numero");
+                    Log.i("numero", String.valueOf(nCategories));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (nCategories == 0) {
+                    this.finish();
+                }
+                categories = new Category[nCategories];
+                Log.i("catname", interests[0].getCategory_name());
+                for (int i = 0; i < nCategories; i++) {
+                    categories[i] = new Category(i + 1, interests[i].getCategory_name());
+                    for (int j = 0; j < interests.length; j++) {
+                        if (interests[j].getCategory_id() == i + 1) {
+                            categories[i].setInterests(interests[j]);
+                            Log.i("interest", interests[i].toString());
+                        }
                     }
                 }
+                final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_category_interests);
+                final CategoryRecyclerViewAdapter adapter = new CategoryRecyclerViewAdapter(categories, getApplicationContext());
+                final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+
+                int interestNumber[] = new int[adapter.getItemCount()];
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        recyclerView.setLayoutManager(mLayoutManager);
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        recyclerView.setAdapter(adapter);
+                    }
+                });
             }
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_category_interests);
-
-                    CategoryRecyclerViewAdapter adapter = new CategoryRecyclerViewAdapter(categories, getApplicationContext());
-                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                    recyclerView.setLayoutManager(mLayoutManager);
-                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-                    recyclerView.setAdapter(adapter);
-                }
-            });
-
-        }catch(IOException e){
+            else{
+                Log.i("Interests","setting");
+            }
+        }catch(Exception e){
             Log.e("Interest response error",e.toString());
         }
     }
 }
 
-class InterestHandler extends AsyncTask<String, String, String> {
+class GetInterestHandler extends AsyncTask<String, String, String> {
 
     Response response = null;
     ResponseListener listener;
@@ -130,7 +150,7 @@ class InterestHandler extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... params){
         String ritorno;
-
+        Log.i("Request",params[0]);
         OkHttpClient http = new OkHttpClient();
         http.setConnectTimeout(5, TimeUnit.SECONDS);
         RequestBody form = new FormEncodingBuilder()
@@ -176,3 +196,57 @@ class InterestHandler extends AsyncTask<String, String, String> {
 
 }
 
+
+class SendInterestHandler extends AsyncTask<String, String, String> {
+
+    Response response = null;
+    ResponseListener listener;
+
+    @Override
+    protected String doInBackground(String... params){
+        String ritorno;
+        Log.i("Request",params[0]);
+        OkHttpClient http = new OkHttpClient();
+        http.setConnectTimeout(5, TimeUnit.SECONDS);
+        RequestBody form = new FormEncodingBuilder()
+                .add("interests", params[0])
+                .build();
+        Request request = new Request.Builder()
+                .url(Resources.API_SET_INTERESTS)
+                .post(form)
+                .build();
+        try {
+            Log.i("listener reference",listener.toString());
+            //this.publishProgress("richiesta");
+            response = http.newCall(request).execute();
+            this.publishProgress("risposta");
+            listener.onApiResponseReceived(response);
+            Log.i("response",response.toString());
+            Log.i("response body",response.body().string());
+            ritorno = response.toString();
+        }catch(UnknownHostException e){
+            Log.e("Request exception","Host sconosciuto");
+            this.publishProgress("HOST SCONOSCIUTO");
+            ritorno = "unknownhost";
+        }catch(IOException e){
+            Log.e("Request exception","IOException");
+            this.publishProgress("Errore di I/O");
+            ritorno = "ioexception";
+        }
+        return ritorno;
+    }
+
+    @Override
+    protected void onProgressUpdate(String... values) {
+        super.onProgressUpdate(values);
+    }
+
+    public void connect(String data){
+        this.execute(data);
+    }
+
+    void addListener(ResponseListener listenerToAdd){
+        listener=listenerToAdd;
+    }
+
+}
