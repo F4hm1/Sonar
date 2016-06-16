@@ -3,6 +3,9 @@ package it.cnvcrew.sonar;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -89,7 +92,7 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
             JSONObject object = array.getJSONObject(array.length() - 1);
             Log.i("operation",object.getString("operation"));
             if(object.getString("operation").equals("get")) {
-                /*
+
                 Log.i("Interest","getting");
                 interests = gson.fromJson(risposta, Interest[].class);
                 int nCategories = 0;
@@ -105,16 +108,30 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
                     this.finish();
                 }
                 categories = new Category[nCategories];
-                Log.i("catname", interests[0].getCategory_name());
-                for (int i = 0; i < nCategories; i++) {
+                for(int i = 0; i < nCategories; i++){
+                    categories[i] = new Category(i+1);
+                }
+                /*for (int i = 0; i < nCategories; i++) {
+                    Log.i("catname", interests[i].getCategory_name());
+                    Log.i("i interest",interests[i].toString());
                     categories[i] = new Category(i + 1, interests[i].getCategory_name());
                     for (int j = 0; j < interests.length; j++) {
                         if (interests[j].getCategory_id() == i + 1) {
                             categories[i].setInterests(interests[j]);
-                            Log.i("interest", interests[i].toString());
+                            Log.i("j interest", interests[j].toString());
+                        }
+                    }
+                }*/
+
+                for(int i = 0; i < interests.length; i++){
+                    for(int j = 0; j < nCategories; j++){
+                        if(interests[i].getCategory_id() == categories[j].getId()){
+                            categories[j].setName(interests[i].getCategory_name());
+                            categories[j].setInterests(interests[i]);
                         }
                     }
                 }
+
                 final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_category_interests);
                 final CategoryRecyclerViewAdapter adapter = new CategoryRecyclerViewAdapter(categories, getApplicationContext());
                 final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -130,7 +147,7 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
                         recyclerView.setAdapter(adapter);
                     }
-                }); */
+                });
             }
             else{
                 Log.i("Interests","setting");

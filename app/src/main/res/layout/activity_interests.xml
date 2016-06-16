@@ -1,23 +1,30 @@
-<!-- <com.gigamole.library.ntb.NavigationTabBar android:id="@+id/ntb"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    app:ntb_animation_duration="400"
-    app:ntb_corners_radius="10dp"
-    app:ntb_active_color="#fff"
-    app:ntb_inactive_color="#000"
-    app:ntb_badged="true"
-    app:ntb_titled="true"
-    app:ntb_scaled="true"
-    app:ntb_tinted="true"
-    app:ntb_title_mode="all"
-    app:ntb_badge_position="left"
-    app:ntb_badge_gravity="top"
-    app:ntb_badge_bg_color="#ffff0000"
-    app:ntb_badge_title_color="#ffffffff"
-    app:ntb_typeface="fonts/custom_typeface.ttf"
-    app:ntb_badge_use_typeface="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android" /> -->
-<RelativeLayout android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"></RelativeLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_category_interests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" />
+
+        <!-- <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_title"
+                />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </ListView>
+
+        </android.support.v7.widget.CardView> -->
+
+
+</RelativeLayout>

@@ -51,6 +51,9 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
         Log.i("title",Integer.toString(holder.title.getId()));
         tv_nome.setText(String.valueOf(category.getName()));
         lv_interests.setAdapter(new InterestListViewAdapter(context, category.getInterestsArray()));
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 105 * (category.getInterestsArray().length + 1));
+        params.setMargins(15,15,15,15);
+        cv_card.setLayoutParams(params);
 
     }
 

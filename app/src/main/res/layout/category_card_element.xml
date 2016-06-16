@@ -9,13 +9,11 @@
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
+        android:layout_height="wrap_content"
         card_view:cardCornerRadius="4dp"
         card_view:cardBackgroundColor="#909090"
-        android:elevation="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp">
+        android:elevation="3dp"
+        android:layout_margin="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
