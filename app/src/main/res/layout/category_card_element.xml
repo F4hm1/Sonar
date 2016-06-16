@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="4dp"
-        card_view:cardBackgroundColor="#909090"
-        android:elevation="3dp"
+        card_view:cardBackgroundColor="#EEEEEE"
+        android:elevation="5dp"
         android:layout_margin="10dp">
 
         <LinearLayout
@@ -25,8 +25,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
-                android:textSize="16sp"
-                android:text="LOL"
+                android:textSize="20sp"
                 android:id="@+id/tv_interest"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp" />

@@ -8,6 +8,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;

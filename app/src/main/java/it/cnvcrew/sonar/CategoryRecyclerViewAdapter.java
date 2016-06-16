@@ -39,8 +39,6 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
         lv_interests = (ListView) itemView.findViewById(R.id.lv_interest);
         rl_card = (RelativeLayout) itemView.findViewById(R.id.rl_card_element);
         cv_card = (CardView) itemView.findViewById(R.id.card_view);
-
-
         return new MyViewHolder(itemView);
     }
 
@@ -51,8 +49,9 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
         Log.i("title",Integer.toString(holder.title.getId()));
         tv_nome.setText(String.valueOf(category.getName()));
         lv_interests.setAdapter(new InterestListViewAdapter(context, category.getInterestsArray()));
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 105 * (category.getInterestsArray().length + 1));
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 110 + (105 * category.getInterestsArray().length));
         params.setMargins(15,15,15,15);
+        //cv_card.setElevation(8);
         cv_card.setLayoutParams(params);
 
     }
