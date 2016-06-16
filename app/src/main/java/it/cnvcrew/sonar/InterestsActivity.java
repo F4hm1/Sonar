@@ -3,9 +3,6 @@ package it.cnvcrew.sonar;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -92,6 +89,7 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
             JSONObject object = array.getJSONObject(array.length() - 1);
             Log.i("operation",object.getString("operation"));
             if(object.getString("operation").equals("get")) {
+                /*
                 Log.i("Interest","getting");
                 interests = gson.fromJson(risposta, Interest[].class);
                 int nCategories = 0;
@@ -128,10 +126,11 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
                     public void run() {
 
                         recyclerView.setLayoutManager(mLayoutManager);
+                        recyclerView.setHasFixedSize(true);
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
                         recyclerView.setAdapter(adapter);
                     }
-                });
+                }); */
             }
             else{
                 Log.i("Interests","setting");

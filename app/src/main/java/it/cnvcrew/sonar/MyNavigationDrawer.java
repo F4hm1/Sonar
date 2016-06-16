@@ -27,7 +27,7 @@ import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 public class MyNavigationDrawer extends MaterialNavigationDrawer {
     Gson gson = new Gson();
 
-    private ProfileFragment ProfileFragment;
+    private ProfileFragment profiloFragment;
     private SettingsFragment settingsFragment;
     private EventsFragment eventsFragment;
     private LogoutFragment logoutFragment;
@@ -49,7 +49,8 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         surname = loggedUser.getCognome();
         email = loggedUser.getEmail();
 
-        ProfileFragment = new ProfileFragment();
+        profiloFragment = new ProfileFragment(name, surname);
+        //ProfileFragment = new ProfileFragment();
         eventsFragment = new EventsFragment();
         settingsFragment = new SettingsFragment();
         logoutFragment = new LogoutFragment();
@@ -84,7 +85,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         //Account
         MaterialAccount account = new MaterialAccount(this.getResources(),name + " " + surname,email,profilePic, R.drawable.sunsetswerve);
         //Items
-        MaterialSection accountSection = newSection("Profilo", R.drawable.ic_account, ProfileFragment);
+        MaterialSection accountSection = newSection("Profilo", R.drawable.ic_account, profiloFragment);
         MaterialSection geoSection = newSection("Posizione", R.drawable.ic_position, positionFragment);
         MaterialSection eventSection = newSection("Eventi", R.drawable.ic_events, eventsFragment);
         MaterialSection settingSection = newSection("Impostazioni", R.drawable.ic_settings, SettingsActivity.class);
@@ -133,4 +134,3 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         return email;
     }
 }
-

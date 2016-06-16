@@ -11,21 +11,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfileFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-
 public class ProfileFragment extends Fragment {
 
     private SharedPreferences sharedPrefs;
+    private String name,surname;
 
     public ProfileFragment() {
         // Required empty public constructor
+    }
+
+    public ProfileFragment(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
     }
 
     @Override
@@ -40,8 +37,8 @@ public class ProfileFragment extends Fragment {
 
         //Set name and surname TextView with user's name and surname
         //TODO cambiare porcamadonna
-        ((TextView) v.findViewById(R.id.tvNome)).setText(MyNavigationDrawer.name);
-        ((TextView) v.findViewById(R.id.tvCognome)).setText(MyNavigationDrawer.surname);
+        ((TextView) v.findViewById(R.id.tvNome)).setText(name);
+        ((TextView) v.findViewById(R.id.tvCognome)).setText(surname);
 
         //Blur background image of the header
         BlurImage blurImage = new BlurImage();
