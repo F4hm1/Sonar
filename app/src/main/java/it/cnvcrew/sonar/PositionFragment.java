@@ -2,13 +2,13 @@ package it.cnvcrew.sonar;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -40,7 +40,7 @@ public class PositionFragment extends Fragment implements GoogleApiClient.Connec
         android.location.LocationListener, com.google.android.gms.location.LocationListener {
 
     //TODO improve permission handling
-    private GoogleApiClient gAPIClient;
+    public static GoogleApiClient gAPIClient;
     private Location lastLocation;
     private View layout;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION_ACCESS = 2;
@@ -57,33 +57,13 @@ public class PositionFragment extends Fragment implements GoogleApiClient.Connec
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+        gAPIClient.connect();
         v.findViewById(R.id.btn_send_position_high).setOnClickListener(this);
         v.findViewById(R.id.btn_send_position_low).setOnClickListener(this);
         layout=v;
         handler.addListener(this);
+        Intent intent = new Intent(this.getContext(),MapsActivity.class);
 
-        return v;
-    }
-
-    @Override
-    public void onStart(){
-        super.onStart();
-        Log.i("Position","onStart");
-        gAPIClient.connect();
-    }
-
-    @Override
-    public void onStop(){
-        super.onStop();
-        Log.i("Position","onStop");
-        gAPIClient.disconnect();
-    }
-
-    @Override
-    public void onClick (View v){
-        /* LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, ); */
-        Log.i("Position","onClick");
         LocationRequest lRequest;
         try {
             Log.i("Position onClick","try");
@@ -129,21 +109,49 @@ public class PositionFragment extends Fragment implements GoogleApiClient.Connec
         }
         if (lastLocation != null) {
             Log.i("Position onClick","if");
-            TextView mLatitudeText = (TextView) layout.findViewById(R.id.tv_latitude);
+            /*TextView mLatitudeText = (TextView) layout.findViewById(R.id.tv_latitude);
             TextView mLongitudeText = (TextView) layout.findViewById(R.id.tv_longitude);
             TextView mAccuracyText = (TextView) layout.findViewById(R.id.tv_accuracy);
             mLatitudeText.setText(String.valueOf(lastLocation.getLatitude()));
             mLongitudeText.setText(String.valueOf(lastLocation.getLongitude()));
-            mAccuracyText.setText(String.valueOf(lastLocation.getAccuracy()));
+            mAccuracyText.setText(String.valueOf(lastLocation.getAccuracy()));*/
             SharedPreferences sharedPrefs = getActivity().getSharedPreferences(Resources.SHARED_PREFERENCES, Context.MODE_PRIVATE);
             int userId = sharedPrefs.getInt("userId",0);
             Position position = new Position(userId, lastLocation.getLatitude(), lastLocation.getLongitude());
             position.calculateHash();
-            mAccuracyText.setText(gson.toJson(position));
+            // mAccuracyText.setText(gson.toJson(position));
             String positionJson = gson.toJson(position);
             Log.i("position json",positionJson);
             handler.connect(positionJson);
         }
+        Double lat = lastLocation.getLatitude();
+        Double lng = lastLocation.getLongitude();
+        intent.putExtra("lat",lat);
+        intent.putExtra("lng",lng);
+        this.startActivity(intent);
+        return v;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        Log.i("Position","onStart");
+        gAPIClient.connect();
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        Log.i("Position","onStop");
+        gAPIClient.disconnect();
+    }
+
+    @Override
+    public void onClick (View v){
+        /* LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, ); */
+        Log.i("Position","onClick");
+
     }
 
     //@Override
@@ -167,7 +175,7 @@ public class PositionFragment extends Fragment implements GoogleApiClient.Connec
     }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    public void onConnectionFailed( ConnectionResult connectionResult) {
 
     }
 
@@ -179,13 +187,13 @@ public class PositionFragment extends Fragment implements GoogleApiClient.Connec
         Log.i("Longitude", String.valueOf(location.getLongitude()));
         Log.i("Distance", String.valueOf(results[0]));
         Log.i("Net Distance", String.valueOf(results[0]-location.getAccuracy()));
-        ((TextView) this.getActivity().findViewById(R.id.tv_net_accuracy)).setText(String.valueOf(results[0]-location.getAccuracy()));
+       /* ((TextView) this.getActivity().findViewById(R.id.tv_net_accuracy)).setText(String.valueOf(results[0]-location.getAccuracy()));
         if(results[0]<(location.getAccuracy()+1000)){
             ((TextView) this.getActivity().findViewById(R.id.tv_dovesei)).setText("SCUOLA");
         }
         else{
             ((TextView) this.getActivity().findViewById(R.id.tv_dovesei)).setText("SCONOSCIUTO");
-        }
+        }*/
     }
 
     @Override
