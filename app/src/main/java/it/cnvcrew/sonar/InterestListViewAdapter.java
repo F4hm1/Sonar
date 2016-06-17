@@ -1,6 +1,7 @@
 package it.cnvcrew.sonar;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,14 @@ public class InterestListViewAdapter  extends ArrayAdapter<Interest>{
         return convertView;
     }
 
+    @Override
+    public int getCount(){
+        Log.i("interest count",String.valueOf(interests.length));
+        return interests.length;
+    }
 
+    public Interest getInterest(int position){
+        return interests[position];
+    }
 
 }

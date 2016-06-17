@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -23,6 +22,8 @@ import java.util.concurrent.TimeUnit;
 
 public class SplashActivity extends Activity {
 
+    private Thread splashTread;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,10 @@ public class SplashActivity extends Activity {
         PrefetchLogin login = new PrefetchLogin();
         login.setActivity(this);
         login.run();
+
     }
+
+
 
     private class PrefetchLogin extends AsyncTask<Void, Void, String> {
 
