@@ -9,7 +9,7 @@
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         card_view:cardCornerRadius="4dp"
         card_view:cardBackgroundColor="#EEEEEE"
         android:elevation="5dp"
@@ -30,10 +30,11 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp" />
 
-            <ListView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lv_interest" />
+                android:orientation="vertical"
+                android:id="@+id/ll_interest" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

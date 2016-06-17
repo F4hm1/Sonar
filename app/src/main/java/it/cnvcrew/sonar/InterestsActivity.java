@@ -108,20 +108,9 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
                     this.finish();
                 }
                 categories = new Category[nCategories];
-                for(int i = 0; i < nCategories; i++){
-                    categories[i] = new Category(i+1);
+                for(int i = 0; i < nCategories; i++) {
+                    categories[i] = new Category(i + 1);
                 }
-                /*for (int i = 0; i < nCategories; i++) {
-                    Log.i("catname", interests[i].getCategory_name());
-                    Log.i("i interest",interests[i].toString());
-                    categories[i] = new Category(i + 1, interests[i].getCategory_name());
-                    for (int j = 0; j < interests.length; j++) {
-                        if (interests[j].getCategory_id() == i + 1) {
-                            categories[i].setInterests(interests[j]);
-                            Log.i("j interest", interests[j].toString());
-                        }
-                    }
-                }*/
 
                 for(int i = 0; i < interests.length; i++){
                     for(int j = 0; j < nCategories; j++){
