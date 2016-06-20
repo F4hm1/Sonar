@@ -84,7 +84,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
 
         /*Sections*/
         //Account
-        MaterialAccount account = new MaterialAccount(this.getResources(),name + " " + surname,email,profilePic, null);
+        MaterialAccount account = new MaterialAccount(this.getResources(),name + " " + surname,email,profilePic, R.drawable.sunsetswerve);
         //Items
         MaterialSection accountSection = newSection("Profilo", R.drawable.ic_account, profiloFragment);
         MaterialSection geoSection = newSection("Posizione", R.drawable.ic_position, mapActivity);

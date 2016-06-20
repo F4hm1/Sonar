@@ -38,4 +38,5 @@
     <string name="title_activity_settings">Impostazioni</string>
     <string name="your_position">La tua posizione</string>
     <string name="position_permission_denied">Per poter accedere alle funzionalità di base dell\'applicazione, è necessario abilitare l\'accesso alla posizione.</string>
+    <string name="my_interests">I miei interessi</string>
 </resources>

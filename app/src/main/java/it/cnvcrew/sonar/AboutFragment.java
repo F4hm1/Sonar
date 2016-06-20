@@ -3,9 +3,15 @@ package it.cnvcrew.sonar;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.PixelFormat;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.Spanned;
+import android.text.SpannedString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +35,8 @@ public class AboutFragment extends Fragment {
         Element versionElement = new Element().setTitle(pInfo.versionName);
         View aboutPage = new AboutPage(this.getContext())
                 .isRTL(false)
-                .setImage(R.drawable.cnv_logo)
+                .setImage(R.drawable.made_with)
+                .setDescription("When in doubt, don't Google it, StackOverflow it")
                 .addItem(versionElement)
                 .addGroup("Connect with us")
                 .addEmail("cnvriparazioni@gmail.com")
@@ -37,7 +44,7 @@ public class AboutFragment extends Fragment {
                 .addFacebook("lapseofreason")
                 .addTwitter("MrDrusi")
                 .addGitHub("CNVCrew")
-                .addInstagram("filippo_gas")
+                .addInstagram("mrdrus_")
                 .create();
 
         return aboutPage;

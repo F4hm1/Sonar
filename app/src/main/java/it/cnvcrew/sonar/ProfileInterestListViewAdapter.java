@@ -10,14 +10,14 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 /**
- * Created by electrocamel on 09/06/16.
+ * Created by electrocamel on 20/06/16.
  */
-public class InterestListViewAdapter extends ArrayAdapter<Interest>{
+public class ProfileInterestListViewAdapter extends ArrayAdapter<Interest>{
 
     private final Context context;
     private final Interest[] interests;
 
-    public InterestListViewAdapter(Context context, Interest[] interests){
+    public ProfileInterestListViewAdapter(Context context, Interest[] interests){
         super(context, -1 , interests);
         this.context=context;
         this.interests=interests;
@@ -33,9 +33,9 @@ public class InterestListViewAdapter extends ArrayAdapter<Interest>{
         CheckBox cb_isSelected = (CheckBox) convertView.findViewById(R.id.cb_is_selected);
         cb_isSelected.setOnCheckedChangeListener(interests[position]);
         tv_name.setText(interests[position].getName());
-        //sw_isChecked.setChecked(interests[position].is_selected());
-        cb_isSelected.setChecked(interests[position].is_selected());
+        cb_isSelected.setVisibility(View.GONE);
         interests[position].setHas_changed(false);
+        convertView.setVisibility((!interests[position].is_selected()) ? View.GONE : View.VISIBLE);
         return convertView;
     }
 

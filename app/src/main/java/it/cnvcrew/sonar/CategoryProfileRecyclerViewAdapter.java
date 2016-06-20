@@ -1,7 +1,6 @@
 package it.cnvcrew.sonar;
 
 import android.content.Context;
-import android.graphics.PixelFormat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,10 +13,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
- * Created by electrocamel on 14/06/16.
+ * Created by electrocamel on 20/06/16.
  */
-public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.MyViewHolder> {
-
+public class CategoryProfileRecyclerViewAdapter extends RecyclerView.Adapter<CategoryProfileRecyclerViewAdapter.MyViewHolder> {
     private Category[] categories;
     private Context context;
     private TextView tv_nome;
@@ -26,7 +24,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
     private CardView cv_card;
     private View view;
 
-    public CategoryRecyclerViewAdapter(Category[] categories, Context context) {
+    public CategoryProfileRecyclerViewAdapter(Category[] categories, Context context) {
         this.categories = categories;
         this.context = context;
     }
@@ -49,7 +47,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
         Log.i("tv_nome",Integer.toString(tv_nome.getId()));
         Log.i("title",Integer.toString(holder.title.getId()));
         tv_nome.setText(String.valueOf(category.getName()));
-        InterestListViewAdapter interestAdapter = new InterestListViewAdapter(context, category.getInterestsArray());
+        ProfileInterestListViewAdapter interestAdapter = new ProfileInterestListViewAdapter(context, category.getInterestsArray());
         for (int entry = 0; entry < interestAdapter.getCount(); entry++) {
             ll_interests.addView(interestAdapter.getView(entry, null, ll_interests));
             Log.i("adapter interest", interestAdapter.getInterest(entry).toString());
