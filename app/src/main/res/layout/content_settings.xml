@@ -1,0 +1,39 @@
+<com.yarolegovich.mp.MaterialPreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/preference_screen"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="it.cnvcrew.sonar.SettingsFragment">
+
+    <!-- <include layout="@layout/toolbar" /> -->
+
+    <com.yarolegovich.mp.MaterialPreferenceCategory
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mpc_title="@string/appearance">
+
+        <com.yarolegovich.mp.MaterialChoicePreference
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mp_default_value="24 hours"
+            app:mp_entry_values="@array/update_interval"
+            app:mp_show_value="onRight"
+            app:mp_title="@string/update_interval" />
+
+    </com.yarolegovich.mp.MaterialPreferenceCategory>
+
+    <com.yarolegovich.mp.MaterialPreferenceCategory
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mpc_title="@string/notifications">
+
+        <com.yarolegovich.mp.MaterialSwitchPreference
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mp_default_value="true"
+            app:mp_title="@string/enable_notifications" />
+
+    </com.yarolegovich.mp.MaterialPreferenceCategory>
+
+</com.yarolegovich.mp.MaterialPreferenceScreen>

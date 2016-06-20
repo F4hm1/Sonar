@@ -1,0 +1,45 @@
+{
+  "project_info": {
+    "project_number": "544147911587",
+    "firebase_url": "https://sonar-5266e.firebaseio.com",
+    "project_id": "sonar-5266e",
+    "storage_bucket": "sonar-5266e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544147911587:android:ca7f1fd559a2d8e4",
+        "android_client_info": {
+          "package_name": "it.cnvcrew.sonar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544147911587-utfrkl8jsegb4kmtnsmltjb3ao8soq4c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxNVE15Xv1i31tS42_rcM_M0lA0SeXEhM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-78268381-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

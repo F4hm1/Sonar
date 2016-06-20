@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:clickable="true"
-    tools:context="it.cnvcrew.sonar.ProfiloFragment">
+    tools:context=".ProfileFragment">
 
     <ImageView
         android:id="@+id/profile_img_blur"
-        android:src="@drawable/cnv"
+        android:src="@drawable/sunsetswerve"
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -20,7 +20,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_profile_parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -40,6 +41,7 @@
             android:layout_marginBottom="20dp" />-->
 
         <LinearLayout
+            android:id="@+id/ll_profile_header"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,5 +81,25 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/my_interests"
+        android:id="@+id/tv_my_interests"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@+id/profile_img_blur"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold|italic" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_profile_interests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_my_interests"
+        android:scrollbars="vertical"
+        android:layout_marginTop="15dp" />
 
 </RelativeLayout>

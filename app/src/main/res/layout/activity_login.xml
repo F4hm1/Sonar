@@ -4,24 +4,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:background="@drawable/sky"
 
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:id="@+id/imgLogo"
+        android:id="@+id/iv_logo_register"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/img_splash" />
 
     <com.github.florent37.materialtextfield.MaterialTextField
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edit_username_login_layout"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/imgLogo"
+        android:layout_below="@id/iv_logo_register"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -36,6 +37,7 @@
             android:id="@+id/edit_username_login"
             android:inputType="text"
             android:hint="Username"
+            android:inputType="text"
             android:textColor="#333"
             android:textColorHint="#666"
             android:textSize="15sp" />
@@ -69,6 +71,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:id="@+id/bSubmit"
         android:onClick="loginToJson"
         android:text="Login"
@@ -76,6 +79,18 @@
         android:layout_below="@id/edit_password_login_layout"
         android:layout_marginTop="50dp"
         />
+=======
+        android:text="INVIA"
+        android:id="@+id/btn_register"
+        android:layout_below="@+id/edit_password_login_layout"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="10dp"
+        android:onClick="loginToJson"
+        android:elevation="5dp" /> />
+
+
+>>>>>>> dev-alpha
 
     <LinearLayout
         android:orientation="horizontal"

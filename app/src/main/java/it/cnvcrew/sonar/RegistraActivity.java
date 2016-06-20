@@ -20,7 +20,6 @@ import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.sql.Date;
 import java.util.concurrent.TimeUnit;
 
 // TODO mettere errore/shake su campo vuoto come su login
@@ -59,6 +58,10 @@ public class RegistraActivity extends AppCompatActivity implements ResponseListe
         yob = Integer.parseInt(((Spinner) findViewById(R.id.spinner_anni)).getSelectedItem().toString());
         mob = Integer.parseInt(((Spinner) findViewById(R.id.spinner_mesi)).getSelectedItem().toString());
         dayob = Integer.parseInt(((Spinner) findViewById(R.id.spinner_giorni)).getSelectedItem().toString());
+
+        Log.i("YOB", String.valueOf(yob));
+        Log.i("MOB", String.valueOf(mob));
+        Log.i("DAYOB", String.valueOf(dayob));
 
         username = ((EditText) findViewById(R.id.edit_username_register)).getText().toString();
         nome = ((EditText) findViewById(R.id.editName)).getText().toString();
@@ -107,7 +110,9 @@ public class RegistraActivity extends AppCompatActivity implements ResponseListe
 
         Log.i("password", password);
         Log.i("conferma password", confermapassword);
-        Date dob = new Date(yob,mob,dayob);
+        String dob = yob+"-"+mob+"-"+dayob;
+
+        Log.i("DATE",dob);
 
         if(emptyField == false) {
             User toRegister = new User(nome, cognome, username, email, password, dob);
@@ -130,7 +135,8 @@ public class RegistraActivity extends AppCompatActivity implements ResponseListe
 
     @Override
     public void onApiResponseReceived(Response response) {
-
+        Snackbar.make(this.findViewById(R.id.bSubmit),"Utente registrato con successo.",Snackbar.LENGTH_LONG);
+        this.finish();
     }
 }
 
