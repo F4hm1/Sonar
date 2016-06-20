@@ -10,7 +10,7 @@ public class Interest implements CompoundButton.OnCheckedChangeListener{
 
     private int id, category_id;
     private String name, category_name;
-    private boolean is_selected;
+    private boolean is_selected, has_changed = false;
 
     public Interest(int id, int category_id, String name, String category_name, boolean is_selected) {
         this.id = id;
@@ -56,6 +56,14 @@ public class Interest implements CompoundButton.OnCheckedChangeListener{
         this.category_name = category_name;
     }
 
+    public boolean isHas_changed() {
+        return has_changed;
+    }
+
+    public void setHas_changed(boolean has_changed) {
+        this.has_changed = has_changed;
+    }
+
     @Override
     public String toString() {
         return "Interest{" +
@@ -71,5 +79,7 @@ public class Interest implements CompoundButton.OnCheckedChangeListener{
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         this.is_selected = isChecked;
         Log.i("is_selected set to",String.valueOf(isChecked));
+        this.has_changed = !has_changed;
+        Log.i("has_changed set to",String.valueOf(has_changed));
     }
 }

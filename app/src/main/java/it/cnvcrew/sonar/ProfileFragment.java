@@ -35,8 +35,6 @@ public class ProfileFragment extends Fragment {
 
         ((ImageView) v.findViewById(R.id.profile_img)).setImageBitmap(MyNavigationDrawer.profilePic);
 
-        //Set name and surname TextView with user's name and surname
-        //TODO cambiare porcamadonna
         ((TextView) v.findViewById(R.id.tvNome)).setText(name);
         ((TextView) v.findViewById(R.id.tvCognome)).setText(surname);
 

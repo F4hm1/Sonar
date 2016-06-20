@@ -56,11 +56,11 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
         }
         //ll_interests.addView(interestAdapter.getView(position, null, ll_interests));
         //lv_interests.setAdapter(new InterestListViewAdapter(context, category.getInterestsArray()));
-        //RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 110 + (105 * category.getInterestsArray().length));
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 110 + (105 * category.getInterestsArray().length));
 
         //params.setMargins(15,15,15,15);
         //cv_card.setElevation(8);
-        //cv_card.setLayoutParams(params);
+        cv_card.setLayoutParams(params);
 
     }
 

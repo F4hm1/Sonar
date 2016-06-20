@@ -35,6 +35,7 @@ public class InterestListViewAdapter  extends ArrayAdapter<Interest>{
         tv_name.setText(interests[position].getName());
         //sw_isChecked.setChecked(interests[position].is_selected());
         cb_isSelected.setChecked(interests[position].is_selected());
+        interests[position].setHas_changed(false);
         return convertView;
     }
 

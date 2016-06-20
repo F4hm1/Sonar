@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -15,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.florent37.materialtextfield.MaterialTextField;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -132,9 +132,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
                 this.startActivity(mainActivityIntent);
                 this.finish();
             }else{
-                Snackbar.make(this.findViewById(R.id.bSubmit),
-                        "Login Errato.\nAttenzione: il login è case-sensitive!",
-                        Snackbar.LENGTH_LONG).show();
+                Toast.makeText(this, "Refresh", Toast.LENGTH_LONG).show();
                 findViewById(R.id.edit_username_login_layout)
                         .startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
                 findViewById(R.id.edit_password_login_layout)

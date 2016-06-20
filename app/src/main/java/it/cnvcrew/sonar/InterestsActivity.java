@@ -113,6 +113,7 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
                 }
 
                 for(int i = 0; i < interests.length; i++){
+
                     for(int j = 0; j < nCategories; j++){
                         if(interests[i].getCategory_id() == categories[j].getId()){
                             categories[j].setName(interests[i].getCategory_name());
@@ -140,6 +141,9 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
             }
             else{
                 Log.i("Interests","setting");
+                for(int i = 0; i < interests.length; i++) {
+                    interests[i].setHas_changed(false);
+                }
             }
         }catch(Exception e){
             Log.e("Interest response error",e.toString());

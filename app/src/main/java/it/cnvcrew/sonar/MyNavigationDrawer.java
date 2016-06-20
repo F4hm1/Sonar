@@ -32,7 +32,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
     private SettingsFragment settingsFragment;
     private EventsFragment eventsFragment;
     private LogoutFragment logoutFragment;
-    private PositionFragment positionFragment;
+    private Intent mapActivity;
     private AboutFragment aboutFragment;
     public static String name,surname,email;
     protected static Bitmap profilePic;
@@ -55,7 +55,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         eventsFragment = new EventsFragment();
         settingsFragment = new SettingsFragment();
         logoutFragment = new LogoutFragment();
-        positionFragment = new PositionFragment();
+        mapActivity = new Intent(this,MapsActivity.class);
         aboutFragment = new AboutFragment();
         
         //Functionalities
@@ -87,7 +87,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         MaterialAccount account = new MaterialAccount(this.getResources(),name + " " + surname,email,profilePic, null);
         //Items
         MaterialSection accountSection = newSection("Profilo", R.drawable.ic_account, profiloFragment);
-        MaterialSection geoSection = newSection("Posizione", R.drawable.ic_position, positionFragment);
+        MaterialSection geoSection = newSection("Posizione", R.drawable.ic_position, mapActivity);
         MaterialSection eventSection = newSection("Eventi", R.drawable.ic_events, eventsFragment);
         MaterialSection settingSection = newSection("Impostazioni", R.drawable.ic_settings, SettingsActivity.class);
         MaterialSection aboutSection = newSection("Info", R.drawable.ic_info, aboutFragment);
