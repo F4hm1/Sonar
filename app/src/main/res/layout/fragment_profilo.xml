@@ -92,7 +92,7 @@
         android:layout_marginLeft="15dp"
         android:layout_below="@+id/profile_img_blur"
         android:textColor="@color/colorAccent"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_profile_interests"

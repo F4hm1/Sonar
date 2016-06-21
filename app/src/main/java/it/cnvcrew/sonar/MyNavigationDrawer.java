@@ -29,7 +29,6 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
     Gson gson = new Gson();
 
     private ProfileFragment profiloFragment;
-    private SettingsFragment settingsFragment;
     private EventsFragment eventsFragment;
     private LogoutFragment logoutFragment;
     private Intent mapActivity;
@@ -51,9 +50,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         email = loggedUser.getEmail();
 
         profiloFragment = new ProfileFragment(name, surname);
-        //ProfileFragment = new ProfileFragment();
         eventsFragment = new EventsFragment();
-        settingsFragment = new SettingsFragment();
         logoutFragment = new LogoutFragment();
         mapActivity = new Intent(this,MapsActivity.class);
         aboutFragment = new AboutFragment();
@@ -62,7 +59,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         this.setDefaultSectionLoaded(0);
         this.allowArrowAnimation();
         this.disableLearningPattern();
-        //this.enableToolbarElevation();
+        this.enableToolbarElevation();
 
         //Blur header background image
         BlurImage blurImage = new BlurImage();
@@ -89,7 +86,6 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         MaterialSection accountSection = newSection("Profilo", R.drawable.ic_account, profiloFragment);
         MaterialSection geoSection = newSection("Posizione", R.drawable.ic_position, mapActivity);
         MaterialSection eventSection = newSection("Eventi", R.drawable.ic_events, eventsFragment);
-        MaterialSection settingSection = newSection("Impostazioni", R.drawable.ic_settings, SettingsActivity.class);
         MaterialSection aboutSection = newSection("Info", R.drawable.ic_info, aboutFragment);
         MaterialSection logoutSection = newSection("Logout", logoutFragment);
         //Add section to nav drawer
@@ -98,7 +94,6 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
         this.addSection(geoSection);
         this.addSection(eventSection);
         this.addSubheader("Altro");
-        this.addSection(settingSection);
         this.addSection(aboutSection);
         this.addBottomSection(logoutSection);
     }

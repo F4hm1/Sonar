@@ -1,4 +1,4 @@
-<LinearLayout android:orientation="vertical"
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,27 +6,13 @@
     tools:context="it.cnvcrew.sonar.EventsFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <CalendarView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/calendarView"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Eventi in programma"
-        android:id="@+id/tvNextEvents"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="10dp" />
-
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
-</LinearLayout>
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Coming soon..."
+        android:id="@+id/tv_comingsoon"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="40dp" />
+</RelativeLayout>
