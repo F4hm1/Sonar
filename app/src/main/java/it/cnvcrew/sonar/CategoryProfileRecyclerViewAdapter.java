@@ -21,7 +21,6 @@ public class CategoryProfileRecyclerViewAdapter extends RecyclerView.Adapter<Cat
     private TextView tv_nome;
     private LinearLayout ll_interests;
     private RelativeLayout rl_card;
-    private CardView cv_card;
     private View view;
 
     public CategoryProfileRecyclerViewAdapter(Category[] categories, Context context) {
@@ -37,7 +36,6 @@ public class CategoryProfileRecyclerViewAdapter extends RecyclerView.Adapter<Cat
         tv_nome = (TextView) itemView.findViewById(R.id.tv_interest);
         ll_interests = (LinearLayout) itemView.findViewById(R.id.ll_interest);
         rl_card = (RelativeLayout) itemView.findViewById(R.id.rl_card_element);
-        //cv_card = (CardView) itemView.findViewById(R.id.card_view);
         return new MyViewHolder(itemView);
     }
 
@@ -52,13 +50,6 @@ public class CategoryProfileRecyclerViewAdapter extends RecyclerView.Adapter<Cat
             ll_interests.addView(interestAdapter.getView(entry, null, ll_interests));
             Log.i("adapter interest", interestAdapter.getInterest(entry).toString());
         }
-        /*//ll_interests.addView(interestAdapter.getView(position, null, ll_interests));
-        //lv_interests.setAdapter(new InterestListViewAdapter(context, category.getInterestsArray()));
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 110 + (105 * category.getInterestsArray().length));
-
-        //params.setMargins(15,15,15,15);
-        //cv_card.setElevation(8);
-        cv_card.setLayoutParams(params);*/
 
     }
 

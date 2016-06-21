@@ -40,9 +40,6 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
         handler.addListener(this);
         Log.i("interest request",gson.toJson(MyNavigationDrawer.loggedUser));
         handler.connect(gson.toJson(MyNavigationDrawer.loggedUser));
-
-        //RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.interest_rel_layout);
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -126,7 +123,6 @@ public class InterestsActivity extends AppCompatActivity implements ResponseList
                 final CategoryRecyclerViewAdapter adapter = new CategoryRecyclerViewAdapter(categories, getApplicationContext());
                 final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
 
-                int interestNumber[] = new int[adapter.getItemCount()];
 
                 runOnUiThread(new Runnable() {
                     @Override

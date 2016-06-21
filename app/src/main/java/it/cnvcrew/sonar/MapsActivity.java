@@ -107,10 +107,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
                     updateLocation();
 
                 } else {
-                    Dialog dialog = new Dialog(this);
-                    dialog.setContentView(R.layout.permission_denied_dialog);
-                    dialog.setTitle("ACCETTA DIOCAN");
-                    dialog.show();
                     this.finish();
                 }
                 return;
@@ -120,20 +116,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
             // permissions this app might request
         }
     }
-
-    /*private Location getPosition(){
-        Log.i("getPosition","-");
-        LocationRequest lr = new LocationRequest().setInterval(5000).setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        LocationServices.FusedLocationApi.requestLocationUpdates(gAPIClient, lr,this);
-        lastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                gAPIClient);
-        Log.i("location",lastLocation.toString());
-
-        if (lastLocation != null) {
-            updateLocation();
-        }
-        return lastLocation;
-    }*/
 
     @Override
     public void onConnectionSuspended(int i) {

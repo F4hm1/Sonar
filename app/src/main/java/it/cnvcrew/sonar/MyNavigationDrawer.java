@@ -78,7 +78,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer {
             profilePic = BitmapFactory.decodeByteArray(imgBytes, 0, imgBytes.length);
         }catch(Exception e){
             e.printStackTrace();
-            Log.e("tettaprofilo", e.toString());
+            Log.e("Profile image exception", e.toString());
         }
 //        Log.w("profile pic",profilePic.toString());
 
