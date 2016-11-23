@@ -1,5 +1,6 @@
 package it.cnvcrew.sonar;
 
+import android.app.DatePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -8,8 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -18,21 +22,28 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 
 // TODO mettere errore/shake su campo vuoto come su login
-public class RegistraActivity extends AppCompatActivity implements ResponseListener{
+public class RegistraActivity extends AppCompatActivity implements ResponseListener, DatePickerDialog.OnDateSetListener{
 
     Gson gson = new Gson();
+    private int yob,mob,dayob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registra);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_giorni);
+        /*Spinner spinner = (Spinner) findViewById(R.id.spinner_giorni);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.giorni_trentuno, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -45,19 +56,21 @@ public class RegistraActivity extends AppCompatActivity implements ResponseListe
         spinner = (Spinner) findViewById(R.id.spinner_anni);
         adapter = ArrayAdapter.createFromResource(this, R.array.anni, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        spinner.setAdapter(adapter);*/
 
+    }
+
+    public void showDatePicker(View v){
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+        datePickerDialog.show();
     }
 
     public void loginToJson(View v){
 
         String username,nome,cognome,email,password,confermapassword;
-        int yob,mob,dayob;
         boolean emptyField = false;
-
-        yob = Integer.parseInt(((Spinner) findViewById(R.id.spinner_anni)).getSelectedItem().toString());
-        mob = Integer.parseInt(((Spinner) findViewById(R.id.spinner_mesi)).getSelectedItem().toString());
-        dayob = Integer.parseInt(((Spinner) findViewById(R.id.spinner_giorni)).getSelectedItem().toString());
 
         Log.i("YOB", String.valueOf(yob));
         Log.i("MOB", String.valueOf(mob));
@@ -134,9 +147,38 @@ public class RegistraActivity extends AppCompatActivity implements ResponseListe
     }
 
     @Override
-    public void onApiResponseReceived(Response response) {
-        Snackbar.make(this.findViewById(R.id.bSubmit),"Utente registrato con successo.",Snackbar.LENGTH_LONG);
-        this.finish();
+    public void onApiResponseReceived(Response response){
+        String responseMessage = null;
+        try {
+            responseMessage = response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.i("Risposta registra",responseMessage);
+        SignupResponse signupResponse = new SignupResponse();
+        try {
+            signupResponse.setMessage(new JSONObject().getString("message"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String message = signupResponse.getMessage();
+        Log.i("message",message);
+        if(!message.equals("user_exists")) {
+            Snackbar.make(this.findViewById(R.id.iv_logo_register), "Utente registrato con successo.", Snackbar.LENGTH_LONG).show();
+            this.finish();
+        }
+        else{
+            Snackbar.make(this.findViewById(R.id.bSubmit), "Utente già esistente!.", Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        i1 += 1;                                                                                    /* Cose strane di Android */
+        yob = i;
+        mob = i1;
+        dayob = i2;
+        ((TextView) findViewById(R.id.tv_dob)).setText(String.valueOf(i2) + "/" + String.valueOf(i1) + "/" + String.valueOf(i));
     }
 }
 
@@ -162,10 +204,10 @@ class SignUpHandler extends AsyncTask<String, String, String> {
             Log.i("listener reference",listener.toString());
             this.publishProgress("richiesta");
             response = http.newCall(request).execute();
-            this.publishProgress("risposta");
-            listener.onApiResponseReceived(response);
             Log.i("response",response.toString());
             Log.i("response body",response.body().string());
+            this.publishProgress("risposta");
+            listener.onApiResponseReceived(response);
             ritorno = response.toString();
         }catch(UnknownHostException e){
             Log.e("Request exception","Host sconosciuto");

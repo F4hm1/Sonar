@@ -39,7 +39,7 @@ import ch.hsr.geohash.GeoHash;
 
 public class MapsActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener,
-        LocationSource.OnLocationChangedListener, LocationListener{
+        LocationSource.OnLocationChangedListener, LocationListener {
 
     private GoogleMap mMap;
     private GoogleApiClient gAPIClient;
@@ -50,7 +50,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("onCreate","-");
+        Log.i("onCreate", "-");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -66,25 +66,25 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     protected void onStart() {
-        Log.i("onStart","-");
+        Log.i("onStart", "-");
         gAPIClient.connect();
         super.onStart();
     }
 
     protected void onStop() {
-        LocationServices.FusedLocationApi.removeLocationUpdates(gAPIClient,this);
+        LocationServices.FusedLocationApi.removeLocationUpdates(gAPIClient, this);
         gAPIClient.disconnect();
         super.onStop();
     }
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        Log.i("onConnected","-");
+        Log.i("onConnected", "-");
         checkPermissions();
     }
 
-    private void checkPermissions(){
-        Log.i("checkPermissions","-");
+    private void checkPermissions() {
+        Log.i("checkPermissions", "-");
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // Check Permissions Now
@@ -133,8 +133,12 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Log.i("onMapReady","-");
+        Log.i("onMapReady", "-");
         mMap = googleMap;
+        mMap.getUiSettings().setScrollGesturesEnabled(false);
+        mMap.getUiSettings().setZoomGesturesEnabled(false);
+        mMap.setBuildingsEnabled(true);
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
     }
 
     @Override
@@ -144,33 +148,41 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.i("onLocationChanged","-");
+        Log.i("onLocationChanged", "-");
         mMap.clear();
-        LatLng pos = new LatLng(location.getLatitude(),location.getLongitude());
+        LatLng pos = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.addMarker(new MarkerOptions().position(pos).title(getResources().getString(R.string.your_position)));
         mMap.addCircle(new CircleOptions()
                 .center(pos)
                 .radius(1000)
-                .fillColor(Color.argb(80,255,152,0))
-                .strokeColor(Color.argb(200,255,152,0))
+                .fillColor(Color.argb(80, 255, 152, 0))
+                .strokeColor(Color.argb(200, 255, 152, 0))
                 .strokeWidth(5)
         );
         mMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(14.5f));
-        mMap.setBuildingsEnabled(true);
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        hash = GeoHash.withCharacterPrecision(location.getLatitude(),location.getLongitude(),7);
-        Position position = new Position(MyNavigationDrawer.loggedUser.getId(),location.getLatitude(),location.getLongitude(), hash.toBase32());
+        hash = GeoHash.withCharacterPrecision(location.getLatitude(), location.getLongitude(), 7);
+        Position position = new Position(MyNavigationDrawer.loggedUser.getId(), location.getLatitude(), location.getLongitude(), hash.toBase32());
         handler = new PositionHandler();
         String json = gson.toJson(position);
-        Log.i("JSON",json);
+        Log.i("JSON", json);
         handler.connect(json);
     }
 
-    public void updateLocation(){
-        Log.i("updateLocation","-");
+    public void updateLocation() {
+        Log.i("updateLocation", "-");
         LocationRequest lr = new LocationRequest().setInterval(10000).setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        LocationServices.FusedLocationApi.requestLocationUpdates(gAPIClient, lr,this);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(gAPIClient, lr, this);
         Location location = LocationServices.FusedLocationApi.getLastLocation(
                 gAPIClient);
         Log.i("location",location.toString());
